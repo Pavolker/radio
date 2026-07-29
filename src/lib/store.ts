@@ -35,6 +35,11 @@ interface RadioState {
   currentBitrate: number;
   isLiveMode: boolean;
 
+  // Shuffle / Random Mode
+  isShuffled: boolean;
+  shuffleOrder: number[];
+  shuffleIndex: number;
+
   // Modals state
   isGithubModalOpen: boolean;
   isEqualizerModalOpen: boolean;
@@ -65,6 +70,8 @@ interface RadioState {
   toggleTheme: () => void;
   setBitrate: (bitrate: number) => void;
   toggleLiveMode: () => void;
+  toggleShuffle: () => void;
+  reshuffle: () => void;
 
   // Modal Toggles
   setGithubModalOpen: (open: boolean) => void;
@@ -77,6 +84,75 @@ interface RadioState {
   setStationCatalog: (data: RadioCatalogJSON) => void;
 }
 
+/**
+ * Gera uma ordem aleatória dos índices das faixas,
+ * garantindo que duas músicas do mesmo artista não sejam consecutivas.
+ */
+function generateShuffleOrder(tracks: Track[], seed?: number): number[] {
+  const n = tracks.length;
+  
+  // Agrupar índices por artista
+  const artistGroups: Record<string, number[]> = {};
+  tracks.forEach((track, i) => {
+    const artist = track.artist;
+    if (!artistGroups[artist]) artistGroups[artist] = [];
+    artistGroups[artist].push(i);
+  });
+
+  // Embaralhar cada grupo internamente (Fisher-Yates)
+  const artists = Object.keys(artistGroups);
+  for (const artist of artists) {
+    const arr = artistGroups[artist];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+  // Distribuir alternando entre artistas: pegar um de cada vez
+  const result: number[] = [];
+  const pointers: Record<string, number> = {};
+  for (const artist of artists) pointers[artist] = 0;
+
+  // Ordenar artistas por tamanho do grupo (do maior para o menor)
+  const sortedArtists = [...artists].sort((a, b) => artistGroups[b].length - artistGroups[a].length);
+
+  let lastArtist: string | null = null;
+  let remaining = n;
+
+  while (remaining > 0) {
+    // Escolher artista que ainda tem músicas e não repetiu o último
+    let chosen: string | null = null;
+
+    for (const artist of sortedArtists) {
+      if (pointers[artist] < artistGroups[artist].length && artist !== lastArtist) {
+        chosen = artist;
+        break;
+      }
+    }
+
+    // Se todos os artistas restantes são o mesmo, pega dele mesmo (não tem jeito)
+    if (!chosen) {
+      for (const artist of sortedArtists) {
+        if (pointers[artist] < artistGroups[artist].length) {
+          chosen = artist;
+          break;
+        }
+      }
+    }
+
+    if (!chosen) break; // segurança
+
+    const idx = artistGroups[chosen][pointers[chosen]];
+    pointers[chosen]++;
+    result.push(idx);
+    lastArtist = chosen;
+    remaining--;
+  }
+
+  return result;
+}
+
 const DEFAULT_EQ_BANDS: Record<EqualizerPreset, AudioEqualizerBands> = {
   flat: { b60: 0, b230: 0, b910: 0, b3k6: 0, b14k: 0 },
   bass_boost: { b60: 8, b230: 5, b910: 1, b3k6: -2, b14k: -1 },
@@ -87,39 +163,45 @@ const DEFAULT_EQ_BANDS: Record<EqualizerPreset, AudioEqualizerBands> = {
   custom: { b60: 0, b230: 0, b910: 0, b3k6: 0, b14k: 0 }
 };
 
-export const useRadioStore = create<RadioState>((set, get) => ({
-  stationInfo: INITIAL_STATION_INFO,
-  tracks: INITIAL_TRACKS,
-  currentTrackIndex: 0,
-  isPlaying: false,
-  streamStatus: 'paused',
-  volume: 0.85,
-  isMuted: false,
-  visualizerMode: 'aurora',
-  equalizerPreset: 'synthwave',
-  equalizerBands: DEFAULT_EQ_BANDS.synthwave,
-  sleepTimerMinutes: null,
-  sleepTimerSecondsLeft: null,
-  schedule: INITIAL_SCHEDULE,
-  comments: INITIAL_COMMENTS,
-  history: [
-    { track: INITIAL_TRACKS[4], playedAt: '20:15' },
-    { track: INITIAL_TRACKS[3], playedAt: '20:30' }
-  ],
-  favorites: ['track-001', 'track-002'],
-  isCinemaMode: false,
-  theme: 'dark',
-  currentBitrate: 320,
-  isLiveMode: true,
+export const useRadioStore = create<RadioState>((set, get) => {
+  // Ordem aleatória inicial (já embaralhada e sem artistas consecutivos)
+  const initialShuffleOrder = generateShuffleOrder(INITIAL_TRACKS);
 
-  isGithubModalOpen: false,
-  isEqualizerModalOpen: false,
-  isShortcutsModalOpen: false,
-  isLyricsOpen: false,
+  return {
+    stationInfo: INITIAL_STATION_INFO,
+    tracks: INITIAL_TRACKS,
+    currentTrackIndex: initialShuffleOrder[0] || 0,
+    isPlaying: false,
+    streamStatus: 'paused',
+    volume: 0.85,
+    isMuted: false,
+    visualizerMode: 'aurora',
+    equalizerPreset: 'synthwave',
+    equalizerBands: DEFAULT_EQ_BANDS.synthwave,
+    sleepTimerMinutes: null,
+    sleepTimerSecondsLeft: null,
+    schedule: INITIAL_SCHEDULE,
+    comments: INITIAL_COMMENTS,
+    history: [],
+    favorites: ['track-001', 'track-002'],
+    isCinemaMode: false,
+    theme: 'dark',
+    currentBitrate: 320,
+    isLiveMode: true,
 
-  customGithubUrl: 'https://raw.githubusercontent.com/Pavolker/radio/main/public/radio-catalog.json',
-  isFetchingGithub: false,
-  githubError: null,
+    // Shuffle / Random Mode — ligado por padrão
+    isShuffled: true,
+    shuffleOrder: initialShuffleOrder,
+    shuffleIndex: 0,
+
+    isGithubModalOpen: false,
+    isEqualizerModalOpen: false,
+    isShortcutsModalOpen: false,
+    isLyricsOpen: false,
+
+    customGithubUrl: 'https://raw.githubusercontent.com/Pavolker/radio/main/public/radio-catalog.json',
+    isFetchingGithub: false,
+    githubError: null,
 
   togglePlay: () => {
     const { isPlaying, streamStatus } = get();
@@ -132,7 +214,7 @@ export const useRadioStore = create<RadioState>((set, get) => ({
   },
 
   playTrack: (index) => {
-    const { tracks, history, currentTrackIndex } = get();
+    const { tracks, history, currentTrackIndex, shuffleOrder } = get();
     if (index >= 0 && index < tracks.length) {
       const prevTrack = tracks[currentTrackIndex];
       const now = new Date();
@@ -140,26 +222,73 @@ export const useRadioStore = create<RadioState>((set, get) => ({
       
       const newHistory = prevTrack ? [{ track: prevTrack, playedAt: timeStr }, ...history.slice(0, 9)] : history;
 
+      // Encontrar a posição no shuffleOrder
+      const shuffleIdx = shuffleOrder.indexOf(index);
+      const newShuffleIndex = shuffleIdx >= 0 ? shuffleIdx : 0;
+
       audioEngine.resumeContext();
       set({
         currentTrackIndex: index,
         isPlaying: true,
         streamStatus: 'connecting',
-        history: newHistory
+        history: newHistory,
+        shuffleIndex: newShuffleIndex
       });
     }
   },
 
   nextTrack: () => {
-    const { currentTrackIndex, tracks } = get();
-    const nextIdx = (currentTrackIndex + 1) % tracks.length;
-    get().playTrack(nextIdx);
+    const { isShuffled, shuffleOrder, shuffleIndex, tracks, currentTrackIndex } = get();
+    
+    if (isShuffled) {
+      const nextShuffleIdx = (shuffleIndex + 1) % shuffleOrder.length;
+      const nextIdx = shuffleOrder[nextShuffleIdx];
+
+      const now = new Date();
+      const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+      const { history } = get();
+      const prevTrack = tracks[currentTrackIndex];
+      const newHistory = prevTrack ? [{ track: prevTrack, playedAt: timeStr }, ...history.slice(0, 9)] : history;
+
+      audioEngine.resumeContext();
+      set({
+        currentTrackIndex: nextIdx,
+        shuffleIndex: nextShuffleIdx,
+        isPlaying: true,
+        streamStatus: 'connecting',
+        history: newHistory
+      });
+    } else {
+      const nextIdx = (currentTrackIndex + 1) % tracks.length;
+      get().playTrack(nextIdx);
+    }
   },
 
   previousTrack: () => {
-    const { currentTrackIndex, tracks } = get();
-    const prevIdx = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-    get().playTrack(prevIdx);
+    const { isShuffled, shuffleOrder, shuffleIndex, tracks, currentTrackIndex } = get();
+    
+    if (isShuffled) {
+      const prevShuffleIdx = (shuffleIndex - 1 + shuffleOrder.length) % shuffleOrder.length;
+      const prevIdx = shuffleOrder[prevShuffleIdx];
+
+      const now = new Date();
+      const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+      const { history } = get();
+      const prevTrack = tracks[currentTrackIndex];
+      const newHistory = prevTrack ? [{ track: prevTrack, playedAt: timeStr }, ...history.slice(0, 9)] : history;
+
+      audioEngine.resumeContext();
+      set({
+        currentTrackIndex: prevIdx,
+        shuffleIndex: prevShuffleIdx,
+        isPlaying: true,
+        streamStatus: 'connecting',
+        history: newHistory
+      });
+    } else {
+      const prevIdx = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+      get().playTrack(prevIdx);
+    }
   },
 
   setVolume: (vol) => {
@@ -244,6 +373,33 @@ export const useRadioStore = create<RadioState>((set, get) => ({
 
   toggleLiveMode: () => set((state) => ({ isLiveMode: !state.isLiveMode })),
 
+  toggleShuffle: () => {
+    const { isShuffled } = get();
+    if (isShuffled) {
+      set({ isShuffled: false });
+    } else {
+      const { tracks, currentTrackIndex } = get();
+      const newOrder = generateShuffleOrder(tracks);
+      const idx = newOrder.indexOf(currentTrackIndex);
+      if (idx > 0) {
+        newOrder.splice(idx, 1);
+        newOrder.unshift(currentTrackIndex);
+      }
+      set({ isShuffled: true, shuffleOrder: newOrder, shuffleIndex: 0 });
+    }
+  },
+
+  reshuffle: () => {
+    const { tracks, currentTrackIndex } = get();
+    const newOrder = generateShuffleOrder(tracks);
+    const idx = newOrder.indexOf(currentTrackIndex);
+    if (idx > 0) {
+      newOrder.splice(idx, 1);
+      newOrder.unshift(currentTrackIndex);
+    }
+    set({ shuffleOrder: newOrder, shuffleIndex: 0 });
+  },
+
   setGithubModalOpen: (open) => set({ isGithubModalOpen: open }),
   setEqualizerModalOpen: (open) => set({ isEqualizerModalOpen: open }),
   setShortcutsModalOpen: (open) => set({ isShortcutsModalOpen: open }),
@@ -285,11 +441,19 @@ export const useRadioStore = create<RadioState>((set, get) => ({
       currentProgram: data.radio.currentProgram || currentStation.currentProgram
     };
 
+    const newTracks = data.tracks && data.tracks.length > 0 ? data.tracks : get().tracks;
+    const newOrder = generateShuffleOrder(newTracks);
+
     set({
       stationInfo: newStation,
-      tracks: data.tracks && data.tracks.length > 0 ? data.tracks : get().tracks,
+      tracks: newTracks,
       schedule: data.schedule && data.schedule.length > 0 ? data.schedule : get().schedule,
-      currentTrackIndex: 0
+      currentTrackIndex: newOrder[0] || 0,
+      shuffleOrder: newOrder,
+      shuffleIndex: 0,
+      isShuffled: true
     });
   }
-}));
+};
+});
+

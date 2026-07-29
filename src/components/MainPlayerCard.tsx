@@ -13,7 +13,8 @@ import {
   Sliders,
   Sparkles,
   Zap,
-  Info
+  Info,
+  Shuffle
 } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 import { audioEngine } from '../lib/audioEngine';
@@ -44,7 +45,10 @@ export const MainPlayerCard: React.FC = () => {
     isLiveMode,
     toggleLiveMode,
     setLyricsOpen,
-    stationInfo
+    stationInfo,
+    isShuffled,
+    toggleShuffle,
+    reshuffle
   } = useRadioStore();
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -355,6 +359,18 @@ export const MainPlayerCard: React.FC = () => {
                 className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-200 hover:text-white transition-all active:scale-90"
               >
                 <SkipBack className="w-5 h-5" />
+              </button>
+
+              <button
+                onClick={toggleShuffle}
+                title={isShuffled ? 'Aleatório: LIGADO • Clique para desligar' : 'Aleatório: DESLIGADO • Clique para ligar'}
+                className={`p-2.5 rounded-xl border transition-all active:scale-90 ${
+                  isShuffled
+                    ? 'bg-cyan-950/80 border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20'
+                    : 'bg-slate-800 border-white/10 text-slate-500 hover:text-slate-300'
+                }`}
+              >
+                <Shuffle className={`w-4 h-4 ${isShuffled ? 'fill-current' : ''}`} />
               </button>
 
               <button
