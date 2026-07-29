@@ -1,0 +1,6 @@
+{
+  "name": "SINAPSES DOS VENTOS - Rádio Digital 24/7",
+  "description": "Rádio digital SINAPSES DOS VENTOS 24/7 com experiência visual imersiva, transmissão contínua, catálogo via GitHub e visualizadores de áudio em tempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
