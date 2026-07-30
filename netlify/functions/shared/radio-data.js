@@ -1,6 +1,4 @@
-// Dados compartilhados entre as Netlify Functions
-// Mesmo catálogo do radioData.ts
-
+// Dados compartilhados entre as Netlify Functions (ES Module)
 const CDN = 'https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas';
 
 const TRACKS = [
@@ -37,4 +35,4 @@ const CATALOG = {
   ],
 };
 
-module.exports = { TRACKS, CATALOG };
+export { TRACKS, CATALOG };

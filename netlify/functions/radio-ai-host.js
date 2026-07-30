@@ -1,9 +1,8 @@
-// Netlify Function: POST /api/radio/ai-host
+// Netlify Function: POST /api/radio/ai-host (ES Module)
 // Locutor AI via Gemini (com fallback se não tiver chave)
+import { TRACKS, CATALOG } from '../shared/radio-data.js';
 
-const { TRACKS, CATALOG } = require('../shared/radio-data');
-
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -14,7 +13,6 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
-  // Fallback se não for POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }

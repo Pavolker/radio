@@ -1,9 +1,7 @@
-// Netlify Function: GET /api/radio/catalog
-// Proxy do catálogo do GitHub + fallback para dados locais
+// Netlify Function: GET /api/radio/catalog (ES Module)
+import { CATALOG } from '../shared/radio-data.js';
 
-const { CATALOG } = require('../shared/radio-data');
-
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -16,7 +14,7 @@ exports.handler = async (event, context) => {
 
   const targetUrl = event.queryStringParameters?.url;
 
-  // Se não tiver URL, retorna catálogo local
+  // Sem URL, retorna catálogo local
   if (!targetUrl) {
     return {
       statusCode: 200,

@@ -1,9 +1,7 @@
-// Netlify Function: GET /api/radio/status
-// Status simulado da transmissão 24/7
+// Netlify Function: GET /api/radio/status (ES Module)
+import { TRACKS, CATALOG } from '../shared/radio-data.js';
 
-const { TRACKS, CATALOG } = require('../shared/radio-data');
-
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
