@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[functions]
+  node_bundler = "esbuild"
+
 # Redirects de API para as Netlify Functions
 [[redirects]]
   from = "/api/radio/status"

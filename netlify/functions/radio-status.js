@@ -1,5 +1,5 @@
 // Netlify Function: GET /api/radio/status (ES Module)
-import { TRACKS, CATALOG } from '../shared/radio-data.js';
+import { TRACKS, CATALOG } from './shared/radio-data.js';
 
 export const handler = async (event, context) => {
   const headers = {

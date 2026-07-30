@@ -1,6 +1,6 @@
 // Netlify Function: POST /api/radio/ai-host (ES Module)
 // Locutor AI via Gemini (com fallback se não tiver chave)
-import { TRACKS, CATALOG } from '../shared/radio-data.js';
+import { TRACKS, CATALOG } from './shared/radio-data.js';
 
 export const handler = async (event, context) => {
   const headers = {
