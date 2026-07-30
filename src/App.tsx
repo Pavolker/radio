@@ -167,6 +167,9 @@ export default function App() {
 
           <div className="text-xs text-slate-500 font-mono text-center md:text-right">
             © 2026 {stationInfo.name} • Transmissão Ininterrupta 24/7
+            <div className="mt-1 text-[10px] text-slate-600">
+              Copywriter MDH — Desenvolvido por Pvolker — Versão 1.0 — 2026
+            </div>
           </div>
 
         </div>
