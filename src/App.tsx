@@ -6,12 +6,11 @@ import { HistoryAndLyrics } from './components/HistoryAndLyrics';
 import { LiveCommunityChat } from './components/LiveCommunityChat';
 import { DynamicBackground } from './components/DynamicBackground';
 import { EqualizerModal } from './components/EqualizerModal';
-import { GitHubConfigModal } from './components/GitHubConfigModal';
 import { CinemaMode } from './components/CinemaMode';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { AIRadioHostBanner } from './components/AIRadioHostBanner';
 import { useRadioStore } from './lib/store';
-import { Radio, Heart, Github, Globe, ShieldCheck, Sparkles, Volume2 } from 'lucide-react';
+import { Radio, Heart, Globe, ShieldCheck, Sparkles, Volume2 } from 'lucide-react';
 
 export default function App() {
   const {
@@ -26,10 +25,8 @@ export default function App() {
     theme,
     stationInfo,
     setEqualizerModalOpen,
-    setGithubModalOpen,
     setShortcutsModalOpen,
     isEqualizerModalOpen,
-    isGithubModalOpen,
     isShortcutsModalOpen,
     isCinemaMode
   } = useRadioStore();
@@ -62,7 +59,6 @@ export default function App() {
         previousTrack();
       } else if (e.key === 'Escape') {
         if (isEqualizerModalOpen) setEqualizerModalOpen(false);
-        if (isGithubModalOpen) setGithubModalOpen(false);
         if (isShortcutsModalOpen) setShortcutsModalOpen(false);
       }
     };
@@ -78,10 +74,8 @@ export default function App() {
     previousTrack,
     currentTrack,
     isEqualizerModalOpen,
-    isGithubModalOpen,
     isShortcutsModalOpen,
     setEqualizerModalOpen,
-    setGithubModalOpen,
     setShortcutsModalOpen
   ]);
 
@@ -144,14 +138,6 @@ export default function App() {
 
           <div className="flex items-center gap-6 text-xs">
             <button
-              onClick={() => setGithubModalOpen(true)}
-              className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
-            >
-              <Github className="w-4 h-4" />
-              <span>Dados no GitHub</span>
-            </button>
-
-            <button
               onClick={() => setShortcutsModalOpen(true)}
               className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
             >
@@ -177,7 +163,6 @@ export default function App() {
 
       {/* Modals & Fullscreen Overlays */}
       <EqualizerModal />
-      <GitHubConfigModal />
       <KeyboardShortcutsModal />
       <CinemaMode />
 
