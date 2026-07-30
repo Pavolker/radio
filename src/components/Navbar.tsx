@@ -5,7 +5,6 @@ import {
   Maximize2,
   Moon,
   Sun,
-  Github,
   Keyboard,
   Users,
   Activity,
@@ -26,7 +25,6 @@ export const Navbar: React.FC = () => {
     toggleCinemaMode,
     theme,
     toggleTheme,
-    setGithubModalOpen,
     setEqualizerModalOpen,
     setShortcutsModalOpen,
     currentBitrate
@@ -138,16 +136,6 @@ export const Navbar: React.FC = () => {
             className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 text-slate-300 hover:text-pink-400 transition-all active:scale-95"
           >
             <SlidersHorizontal className="w-4 h-4" />
-          </button>
-
-          {/* GitHub Config Modal */}
-          <button
-            onClick={() => setGithubModalOpen(true)}
-            title="Sincronizar Catálogo no GitHub"
-            className="flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 text-xs text-slate-300 hover:text-white transition-all active:scale-95"
-          >
-            <Github className="w-4 h-4 text-emerald-400" />
-            <span className="hidden xl:inline">GitHub Sync</span>
           </button>
 
           {/* Cinema / Studio Fullscreen Mode */}
