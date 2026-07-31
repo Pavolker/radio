@@ -159,6 +159,18 @@ export default function App() {
           </div>
 
         </div>
+
+        {/* Credit Line */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-white/5">
+          <p className="text-center text-xs leading-relaxed text-slate-500 max-w-3xl mx-auto">
+            Essa rádio é o resultado do trabalho de produção de poemas e letras de{' '}
+            <span className="text-slate-300 font-medium">Angélica Sátiro</span> e{' '}
+            <span className="text-slate-300 font-medium">Paulo Volker</span>, mais o trabalho de{' '}
+            <span className="text-cyan-400 font-semibold">Micélio</span>, uma IA especializada em
+            produção, composição e edição musical, baseada na plataforma{' '}
+            <span className="text-slate-300 font-medium">Suno</span>.
+          </p>
+        </div>
       </footer>
 
       {/* Modals & Fullscreen Overlays */}
