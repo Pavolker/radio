@@ -14,6 +14,8 @@ const TRACKS = [
   { id: 'track-010', title: 'Eu Vou Partir', artist: 'Pvolker', album: 'Pvolker', genre: 'MPB / Blues', duration: 254, year: 2025, coverUrl: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=500&q=80', audioUrl: `${CDN}/eu-vou-partir.mp3` },
   { id: 'track-011', title: 'Passo Lento', artist: 'Pvolker', album: 'Pvolker', genre: 'Blues / MPB', duration: 251, year: 2025, coverUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=500&q=80', audioUrl: `${CDN}/passo-lento.mp3` },
   { id: 'track-012', title: 'Vôo Alto', artist: 'Pvolker', album: 'Pvolker', genre: 'MPB / Pop', duration: 298, year: 2025, coverUrl: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=500&q=80', audioUrl: `${CDN}/voo-alto.mp3` },
+  { id: 'track-013', title: 'Curva do Espaço', artist: 'Pvolker', album: 'Pvolker', genre: 'MPB / Experimental', duration: 243, year: 2025, coverUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=500&q=80', audioUrl: `${CDN}/curva-do-espaco.mp3` },
+  { id: 'track-014', title: 'Meia-noite e Meia', artist: 'Angélica Sátiro', album: 'Angélica Sátiro', genre: 'MPB / Blues', duration: 179, year: 2025, coverUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80', audioUrl: `${CDN}/meia-noite-e-meia.mp3` },
 ];
 
 const CATALOG = {

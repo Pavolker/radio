@@ -216,6 +216,36 @@ export const INITIAL_TRACKS: Track[] = [
     secondaryColor: '#a855f7',
     lyrics: `[Verso]\nAbri as asas pro céu\nDeixei o chão pra trás\nO vento me levou pro véu\nOnde a alma voa em paz.\n\n[Refrão]\nVôo alto, vôo livre\nSobre as nuvens vou cantar\nVôo alto, sem limite\nO céu é meu lugar.`,
     artistBio: 'Pvolker finaliza o álbum com uma canção de liberdade e recomeço, misturando otimismo e melodia contagiante.'
+  },
+  {
+    id: 'track-013',
+    title: 'Curva do Espaço',
+    artist: 'Pvolker',
+    album: 'Pvolker',
+    genre: 'MPB / Experimental',
+    duration: 243,
+    year: 2025,
+    coverUrl: COVERS[8],
+    audioUrl: `${CDN}/curva-do-espaco.mp3`,
+    accentColor: '#8b5cf6',
+    secondaryColor: '#06b6d4',
+    lyrics: `[Verso]\nHá uma curva no espaço\nOnde o tempo desacelera\nUm ponto exato de encontro\nQue a distância não altera.\n\n[Refrão]\nCurva do espaço, portal aberto\nEntre o agora e o que virá\nNessa dobra do universo\nNosso encontro vai brilhar.`,
+    artistBio: 'Pvolker explora paisagens sonoras experimentais, misturando MPB com texturas espaciais e letras que dialogam com o cosmos.'
+  },
+  {
+    id: 'track-014',
+    title: 'Meia-noite e Meia',
+    artist: 'Angélica Sátiro',
+    album: 'Angélica Sátiro',
+    genre: 'MPB / Blues',
+    duration: 179,
+    year: 2025,
+    coverUrl: COVERS[4],
+    audioUrl: `${CDN}/meia-noite-e-meia.mp3`,
+    accentColor: '#6366f1',
+    secondaryColor: '#f59e0b',
+    lyrics: `[Verso]\nMeia-noite e meia\nA cidade dorme em paz\nSó o meu coração desperta\nPro amor que não se faz.\n\n[Refrão]\nMeia-noite e meia\nHora de sonhar\nEntre o sono e a vigília\nO tempo para de passar.`,
+    artistBio: 'Angélica Sátiro canta as horas mortas da noite com sensibilidade, unindo o blues noturno à poesia da MPB.'
   }
 ];
 
