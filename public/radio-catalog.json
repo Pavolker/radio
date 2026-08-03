@@ -228,6 +228,58 @@
       "secondaryColor": "#f59e0b",
       "lyrics": "[Verso]\nMeia-noite e meia\nA cidade dorme em paz\nSó o meu coração desperta\nPro amor que não se faz.\n\n[Refrão]\nMeia-noite e meia\nHora de sonhar\nEntre o sono e a vigília\nO tempo para de passar.",
       "artistBio": "Angélica Sátiro canta as horas mortas da noite com sensibilidade, unindo o blues noturno à poesia da MPB."
+    },
+    {
+      "id": "track-015",
+      "title": "Casa de Butxaca",
+      "artist": "Angélica Sátiro",
+      "album": "Angélica Sátiro",
+      "genre": "MPB / Folk",
+      "duration": 97,
+      "year": 2025,
+      "coverUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/casa-de-butxaca.mp3",
+      "accentColor": "#f59e0b",
+      "secondaryColor": "#06b6d4"
+    },
+    {
+      "id": "track-016",
+      "title": "Milagres",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "genre": "MPB / Pop",
+      "duration": 172,
+      "year": 2025,
+      "coverUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/milagres.mp3",
+      "accentColor": "#a855f7",
+      "secondaryColor": "#f97316"
+    },
+    {
+      "id": "track-017",
+      "title": "Tem Noite",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "genre": "MPB / Pop",
+      "duration": 184,
+      "year": 2025,
+      "coverUrl": "https://images.unsplash.com/photo-1496293455970-f8581aae0e3c?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/tem-noite.mp3",
+      "accentColor": "#0ea5e9",
+      "secondaryColor": "#6366f1"
+    },
+    {
+      "id": "track-018",
+      "title": "Ventana en la Cara",
+      "artist": "Angélica Sátiro",
+      "album": "Angélica Sátiro",
+      "genre": "MPB / Folk",
+      "duration": 135,
+      "year": 2025,
+      "coverUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/ventana-en-la-cara.mp3",
+      "accentColor": "#8b5cf6",
+      "secondaryColor": "#f59e0b"
     }
   ],
   "schedule": [
