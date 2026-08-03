@@ -1,342 +1,111 @@
-import { RadioCatalogJSON, RadioStationInfo, Track, ProgramSchedule, ListenerComment } from '../types';
+import type {
+  RadioStationInfo,
+  Track,
+  ProgramSchedule,
+  ListenerComment,
+  RadioCatalogJSON
+} from '../types';
 
-const CDN = 'https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas';
+// Importa o catálogo do JSON (fonte única de verdade)
+import catalog from '../../public/radio-catalog.json';
 
+// Validação básica da estrutura do JSON
+function validateCatalog(data: any): data is {
+  cdn: string;
+  radio: any;
+  tracks: any[];
+  schedule: any[];
+  comments: any[];
+} {
+  if (!data || typeof data !== 'object') return false;
+  if (typeof data.cdn !== 'string') return false;
+  if (!data.radio || typeof data.radio !== 'object') return false;
+  if (!Array.isArray(data.tracks) || data.tracks.length === 0) return false;
+  if (!Array.isArray(data.schedule)) return false;
+  return true;
+}
+
+// Garante que o JSON é válido em tempo de execução
+if (!validateCatalog(catalog)) {
+  throw new Error(
+    'Falha na validação do public/radio-catalog.json. ' +
+    'Verifique se o arquivo contém os campos obrigatórios: cdn, radio, tracks.'
+  );
+}
+
+const { cdn, radio, tracks: rawTracks, schedule: rawSchedule, comments: rawComments } = catalog;
+
+// Constrói a estação de rádio tipada
 export const INITIAL_STATION_INFO: RadioStationInfo = {
-  name: 'SINAPSES DOS VENTOS',
-  tagline: 'Frequência Autoral • Ondas Sonoras Brasileiras 24/7',
-  frequency: '108.8 FM',
-  description: 'A rádio que pulsa com a música autoral brasileira. Angélica Sátiro e Pvolker em sintonia contínua, do blues ao pop, da MPB à poesia sonora.',
-  streamUrl: `${CDN}/a-vida.mp3`,
-  backupStreamUrls: [
-    `${CDN}/aqui-agora.mp3`,
-    `${CDN}/passo-lento.mp3`
-  ],
-  location: 'Estúdio Central • São Paulo / Ventos Digitais',
-  currentProgram: 'Nocturna Cyber Sessions',
-  djHost: 'DJ Sinapses AI',
-  githubRepoUrl: 'https://github.com/Pavolker/radio',
-  githubJsonPath: 'main/public/radio-catalog.json',
-  bitrateKbps: 320,
-  format: 'HQ MP3 Stream'
+  name: radio.name || 'SINAPSES DOS VENTOS',
+  tagline: radio.tagline || 'Frequência Autoral 24/7',
+  frequency: radio.frequency || '108.8 FM',
+  description: radio.description || '',
+  streamUrl: radio.streamUrl || `${cdn}/a-vida.mp3`,
+  backupStreamUrls: radio.backupStreamUrls || [],
+  location: radio.location || 'Estúdio Central',
+  currentProgram: radio.currentProgram || 'Nocturna Cyber Sessions',
+  djHost: radio.djHost || 'DJ Sinapses AI',
+  githubRepoUrl: radio.githubRepoUrl || '',
+  githubJsonPath: radio.githubJsonPath || '',
+  bitrateKbps: radio.bitrateKbps || 320,
+  format: radio.format || 'HQ MP3 Stream'
 };
 
-const COVERS = [
-  'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1518602164578-cd0074062767?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1496293455970-f8581aae0e3c?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=500&q=80',
-  'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=500&q=80',
-];
+// Converte tracks cruas para o tipo Track
+export const INITIAL_TRACKS: Track[] = rawTracks.map((t: any, index: number) => ({
+  id: t.id || `track-${String(index + 1).padStart(3, '0')}`,
+  title: t.title || 'Faixa sem título',
+  artist: t.artist || 'Artista desconhecido',
+  album: t.album || 'Álbum desconhecido',
+  coverUrl: t.coverUrl || '',
+  audioUrl: t.audioUrl || `${cdn}/a-vida.mp3`,
+  genre: t.genre || 'MPB',
+  duration: typeof t.duration === 'number' && t.duration > 0 ? t.duration : 180,
+  year: t.year,
+  lyrics: t.lyrics,
+  artistBio: t.artistBio,
+  accentColor: t.accentColor || '#6366f1',
+  secondaryColor: t.secondaryColor || '#ec4899'
+}));
 
-export const INITIAL_TRACKS: Track[] = [
-  {
-    id: 'track-001',
-    title: 'A Doença Chegou',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'MPB / Blues',
-    duration: 195,
-    year: 2025,
-    coverUrl: COVERS[0],
-    audioUrl: `${CDN}/a-doenca-chegou.mp3`,
-    accentColor: '#ec4899',
-    secondaryColor: '#06b6d4',
-    lyrics: `[Instrumental]\n\nA doença chegou de mansinho\nLevou o que tinha valor\nFicou o silêncio e o caminho\nE a força que vem da dor.\n\n[Refrão]\nMesmo na noite mais escura\nHá uma chama que não se apaga\nA doença chegou, mas não venceu\nQuem ficou de pé sou eu.`,
-    artistBio: 'Angélica Sátiro é cantora e compositora brasileira com forte influência de MPB, blues e poesia. Suas canções transitam entre a dor e a superação com letras profundas e melodias marcantes.'
-  },
-  {
-    id: 'track-002',
-    title: 'A Que Ficou de Pé',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'MPB',
-    duration: 145,
-    year: 2025,
-    coverUrl: COVERS[1],
-    audioUrl: `${CDN}/a-que-ficou-de-pe.mp3`,
-    accentColor: '#8b5cf6',
-    secondaryColor: '#3b82f6',
-    lyrics: `[Verso]\nTantas quedas pelo chão\nTantas pedras no sapato\nMas eu tenho coração\nE não paro por um trato.\n\n[Refrão]\nSou a que ficou de pé\nDepois da tempestade\nCada cicatriz virou medalha\nDe honra e de verdade.`,
-    artistBio: 'Angélica Sátiro é cantora e compositora brasileira. Sua música carrega a força da mulher nordestina, misturando ritmos brasileiros com letras de resistência.'
-  },
-  {
-    id: 'track-003',
-    title: 'Blues do Cansaço',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'Blues',
-    duration: 260,
-    year: 2025,
-    coverUrl: COVERS[2],
-    audioUrl: `${CDN}/blues-do-cansaco.mp3`,
-    accentColor: '#f43f5e',
-    secondaryColor: '#eab308',
-    lyrics: `[Blues Lento]\n\nO corpo pesa no fim do dia\nA alma chora sem ter razão\nMais um dia de labuta fria\nBlues do cansaço no coração.\n\n[Refrão]\nToque a guitarra bem baixinho\nQue a noite vem me embalar\nBlues do cansaço, meu cantinho\nOnde posso descansar.`,
-    artistBio: 'Angélica Sátiro traz influências do blues americano misturado à soul music brasileira, criando um som autêntico e visceral.'
-  },
-  {
-    id: 'track-004',
-    title: 'Leão que Pensa',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'MPB / Pop',
-    duration: 183,
-    year: 2025,
-    coverUrl: COVERS[3],
-    audioUrl: `${CDN}/leao-que-pensa.mp3`,
-    accentColor: '#f97316',
-    secondaryColor: '#a855f7',
-    lyrics: `[Verso]\nLeão que pensa não caça\nLeão que pensa cria\nTransforma a garra em palavra\nE a selva em poesia.\n\n[Refrão]\nRuge baixo, pensa alto\nO mundo é seu domínio\nLeão que pensa não desiste\nSegue o próprio instinto.`,
-    artistBio: 'Angélica Sátiro é conhecida por suas letras que mesclam reflexão filosófica com melodias cativantes, criando um estilo único no cenário independente.'
-  },
-  {
-    id: 'track-005',
-    title: 'Ninguém Canta pra Mim',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'MPB',
-    duration: 197,
-    year: 2025,
-    coverUrl: COVERS[4],
-    audioUrl: `${CDN}/ninguem-canta-pra-mim.mp3`,
-    accentColor: '#10b981',
-    secondaryColor: '#0ea5e9',
-    lyrics: `[Verso]\nAs paredes têm ouvidos\nMas ninguém ouve a minha voz\nCanto baixo entre os ruídos\nNinguém canta pra mim depois.\n\n[Refrão]\nSe ninguém canta pra mim\nEu canto meu próprio refrão\nA solidão virou canção\nE a música é meu chão.`,
-    artistBio: 'Angélica Sátiro compõe sobre solidão, amor e resistência com uma sensibilidade única, conquistando ouvintes que buscam emoção genuína na música.'
-  },
-  {
-    id: 'track-006',
-    title: 'Sereia de Todas as Águas',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'Folk / MPB',
-    duration: 101,
-    year: 2025,
-    coverUrl: COVERS[5],
-    audioUrl: `${CDN}/sereia-de-todas-as-aguas.mp3`,
-    accentColor: '#06b6d4',
-    secondaryColor: '#6366f1',
-    lyrics: `[Verso]\nSereia de todas as águas\nCanta pro marinheiro\nSeu canto cura mágoas\nE acalma o mundo inteiro.\n\n[Refrão]\nSuas ondas levam a dor\nTrazem a paz pro pescador\nSereia de todas as águas\nCanta pra mim, por favor.`,
-    artistBio: 'Angélica Sátiro navega entre o folk e a MPB com histórias que evocam o litoral brasileiro e a espiritualidade das águas.'
-  },
-  {
-    id: 'track-007',
-    title: 'A Vida',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'MPB / Pop',
-    duration: 180,
-    year: 2025,
-    coverUrl: COVERS[6],
-    audioUrl: `${CDN}/a-vida.mp3`,
-    accentColor: '#6366f1',
-    secondaryColor: '#ec4899',
-    lyrics: `[Verso]\nA vida é um sopro no vento\nUm instante de luz\nNão dá pra guardar o tempo\nSó vivê-lo com saúde.\n\n[Refrão]\nViva, que a vida é agora\nO amanhã é incerto demais\nCante, dance, sinta, chore\nA vida não espera demais.`,
-    artistBio: 'Pvolker é artista independente com influências de pop rock e MPB contemporânea. Letras que falam sobre existência, amor e o cotidiano com sensibilidade.'
-  },
-  {
-    id: 'track-008',
-    title: 'Aqui Agora',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'Pop / MPB',
-    duration: 133,
-    year: 2025,
-    coverUrl: COVERS[7],
-    audioUrl: `${CDN}/aqui-agora.mp3`,
-    accentColor: '#a855f7',
-    secondaryColor: '#f97316',
-    lyrics: `[Verso]\nO relógio parou no tempo\nO mundo lá fora não importa\nSó existe o nosso momento\nNessa bolha que o amor suporta.\n\n[Refrão]\nAqui, agora, só nós dois\nO universo inteiro depois\nAqui, agora, sem pressa\nQue a vida é uma promessa.`,
-    artistBio: 'Pvolker produz músicas que convidam à reflexão sobre o presente, com arranjos suaves e vocais marcantes.'
-  },
-  {
-    id: 'track-009',
-    title: 'E Se Fosse',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'Pop / MPB',
-    duration: 119,
-    year: 2025,
-    coverUrl: COVERS[8],
-    audioUrl: `${CDN}/e-se-fosse.mp3`,
-    accentColor: '#eab308',
-    secondaryColor: '#10b981',
-    lyrics: `[Verso]\nE se fosse a última vez?\nO que você diria?\nSe o mundo acabasse em um mês\nO que você faria?\n\n[Refrão]\nE se fosse… e se fosse?\nO amor não espera o amanhã\nE se fosse a última chance\nDe ser mais que um irmão?`,
-    artistBio: 'Pvolker explora questões existenciais em suas composições, convidando o ouvinte a refletir sobre o que realmente importa.'
-  },
-  {
-    id: 'track-010',
-    title: 'Eu Vou Partir',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'MPB / Blues',
-    duration: 254,
-    year: 2025,
-    coverUrl: COVERS[9],
-    audioUrl: `${CDN}/eu-vou-partir.mp3`,
-    accentColor: '#ef4444',
-    secondaryColor: '#3b82f6',
-    lyrics: `[Verso Lento]\nAs malas estão no canto\nO trem vai apitar\nFica o pranto e o espanto\nMas preciso navegar.\n\n[Refrão]\nEu vou partir, não sei voltar\nO destino é quem vai guiar\nEu vou partir, levo no peito\nO que o tempo não pode apagar.`,
-    artistBio: 'Pvolker traz em suas canções a temática da jornada, da partida e dos recomeços, com influências do folk e do blues.'
-  },
-  {
-    id: 'track-011',
-    title: 'Passo Lento',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'Blues / MPB',
-    duration: 251,
-    year: 2025,
-    coverUrl: COVERS[10],
-    audioUrl: `${CDN}/passo-lento.mp3`,
-    accentColor: '#f59e0b',
-    secondaryColor: '#6366f1',
-    lyrics: `[Blues]\nCaminho em passo lento\nNa estrada de chão batido\nCarregando o sentimento\nDe um amor já despedido.\n\n[Refrão]\nPasso lento, passo certo\nCada dor vira canção\nO caminho é longo e aberto\nMas sigo com o coração.`,
-    artistBio: 'Pvolker compõe com a cadência do blues e a alma da MPB, criando uma sonoridade que acalenta e faz pensar.'
-  },
-  {
-    id: 'track-012',
-    title: 'Vôo Alto',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'MPB / Pop',
-    duration: 298,
-    year: 2025,
-    coverUrl: COVERS[11],
-    audioUrl: `${CDN}/voo-alto.mp3`,
-    accentColor: '#0ea5e9',
-    secondaryColor: '#a855f7',
-    lyrics: `[Verso]\nAbri as asas pro céu\nDeixei o chão pra trás\nO vento me levou pro véu\nOnde a alma voa em paz.\n\n[Refrão]\nVôo alto, vôo livre\nSobre as nuvens vou cantar\nVôo alto, sem limite\nO céu é meu lugar.`,
-    artistBio: 'Pvolker finaliza o álbum com uma canção de liberdade e recomeço, misturando otimismo e melodia contagiante.'
-  },
-  {
-    id: 'track-013',
-    title: 'Curva do Espaço',
-    artist: 'Pvolker',
-    album: 'Pvolker',
-    genre: 'MPB / Experimental',
-    duration: 243,
-    year: 2025,
-    coverUrl: COVERS[8],
-    audioUrl: `${CDN}/curva-do-espaco.mp3`,
-    accentColor: '#8b5cf6',
-    secondaryColor: '#06b6d4',
-    lyrics: `[Verso]\nHá uma curva no espaço\nOnde o tempo desacelera\nUm ponto exato de encontro\nQue a distância não altera.\n\n[Refrão]\nCurva do espaço, portal aberto\nEntre o agora e o que virá\nNessa dobra do universo\nNosso encontro vai brilhar.`,
-    artistBio: 'Pvolker explora paisagens sonoras experimentais, misturando MPB com texturas espaciais e letras que dialogam com o cosmos.'
-  },
-  {
-    id: 'track-014',
-    title: 'Meia-noite e Meia',
-    artist: 'Angélica Sátiro',
-    album: 'Angélica Sátiro',
-    genre: 'MPB / Blues',
-    duration: 179,
-    year: 2025,
-    coverUrl: COVERS[4],
-    audioUrl: `${CDN}/meia-noite-e-meia.mp3`,
-    accentColor: '#6366f1',
-    secondaryColor: '#f59e0b',
-    lyrics: `[Verso]\nMeia-noite e meia\nA cidade dorme em paz\nSó o meu coração desperta\nPro amor que não se faz.\n\n[Refrão]\nMeia-noite e meia\nHora de sonhar\nEntre o sono e a vigília\nO tempo para de passar.`,
-    artistBio: 'Angélica Sátiro canta as horas mortas da noite com sensibilidade, unindo o blues noturno à poesia da MPB.'
-  }
-];
+// Programação
+export const INITIAL_SCHEDULE: ProgramSchedule[] = rawSchedule.map((s: any) => ({
+  id: s.id || `prog-${Date.now()}`,
+  title: s.title || 'Programação',
+  host: s.host || 'DJ Sinapses AI',
+  timeSlot: s.timeSlot || '00:00 - 23:59',
+  genre: s.genre || 'MPB',
+  coverImage: s.coverImage || '',
+  description: s.description || '',
+  isCurrent: s.isCurrent === true
+}));
 
-export const INITIAL_SCHEDULE: ProgramSchedule[] = [
-  {
-    id: 'prog-01',
-    title: 'Amanhecer com MPB',
-    host: 'DJ Sinapses AI',
-    timeSlot: '06:00 - 10:00',
-    genre: 'MPB',
-    coverImage: COVERS[6],
-    description: 'Acorde com os sons suaves da MPB autoral. Para começar o dia com poesia e melodia.',
-    isCurrent: false
-  },
-  {
-    id: 'prog-02',
-    title: 'Blues do Meio-Dia',
-    host: 'DJ Sinapses AI',
-    timeSlot: '12:00 - 14:00',
-    genre: 'Blues / MPB',
-    coverImage: COVERS[2],
-    description: 'Blues e MPB para aquecer a tarde. Clássicos autorais com groove e alma.',
-    isCurrent: false
-  },
-  {
-    id: 'prog-03',
-    title: 'Tarde Autoral',
-    host: 'DJ Sinapses AI',
-    timeSlot: '14:00 - 18:00',
-    genre: 'Pop / MPB',
-    coverImage: COVERS[8],
-    description: 'A produção independente brasileira em destaque. Pvolker e Angélica Sátiro o tempo todo.',
-    isCurrent: true
-  },
-  {
-    id: 'prog-04',
-    title: 'Nocturna Cyber Sessions',
-    host: 'DJ Sinapses AI',
-    timeSlot: '22:00 - 06:00',
-    genre: 'MPB / Experimental',
-    coverImage: COVERS[0],
-    description: 'A noite é feita de sons e silêncios. MPB, blues, folk e paisagens sonoras para a madrugada.',
-    isCurrent: false
-  }
-];
+// Comentários iniciais
+export const INITIAL_COMMENTS: ListenerComment[] = (rawComments || []).map((c: any) => ({
+  id: c.id || `comm-${Date.now()}`,
+  userName: c.userName || 'Ouvinte',
+  userAvatar: c.userAvatar || '',
+  text: c.text || '',
+  timestamp: c.timestamp || 'Agora mesmo',
+  reaction: c.reaction,
+  isRequest: c.isRequest === true
+}));
 
-export const INITIAL_COMMENTS: ListenerComment[] = [
-  {
-    id: 'comm-1',
-    userName: 'Mariana_Tech',
-    userAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-    text: 'Que som incrível! A rádio com música autoral brasileira é tudo! 🎧',
-    timestamp: 'Há 2 min',
-    reaction: '⚡'
-  },
-  {
-    id: 'comm-2',
-    userName: 'CyberSamurai_SP',
-    userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-    text: 'Sempre ligado de São Paulo! Angélica Sátiro é sensacional! 🔥',
-    timestamp: 'Há 5 min',
-    reaction: '🔥'
-  },
-  {
-    id: 'comm-3',
-    userName: 'Poeta_Sonoro',
-    userAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80',
-    text: 'Pvolker tem uma das vozes mais bonitas da cena independente! 💜',
-    timestamp: 'Há 12 min',
-    reaction: '💜'
-  },
-  {
-    id: 'comm-4',
-    userName: 'Beatriz_Space',
-    userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
-    text: 'Tocando na sala com o modo Cinema! Que vibe boa! 🌌',
-    timestamp: 'Há 18 min',
-    reaction: '🌌'
-  }
-];
-
+// Catálogo completo no formato RadioCatalogJSON (usado no servidor e no GitHub import)
 export const DEFAULT_GITHUB_CATALOG: RadioCatalogJSON = {
   radio: {
-    name: INITIAL_STATION_INFO.name,
-    tagline: INITIAL_STATION_INFO.tagline,
-    description: INITIAL_STATION_INFO.description,
-    streamUrl: INITIAL_STATION_INFO.streamUrl,
-    frequency: INITIAL_STATION_INFO.frequency,
-    djHost: INITIAL_STATION_INFO.djHost,
-    currentProgram: INITIAL_STATION_INFO.currentProgram
+    name: radio.name,
+    tagline: radio.tagline,
+    description: radio.description,
+    streamUrl: radio.streamUrl,
+    frequency: radio.frequency,
+    djHost: radio.djHost,
+    currentProgram: radio.currentProgram
   },
   tracks: INITIAL_TRACKS,
   schedule: INITIAL_SCHEDULE
 };
+
+// CDN URL exportada para uso em outros lugares
+export const CDN_URL: string = cdn;
