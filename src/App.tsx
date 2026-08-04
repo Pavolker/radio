@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { MainPlayerCard } from './components/MainPlayerCard';
 import { UpcomingSchedule } from './components/UpcomingSchedule';
@@ -10,7 +10,7 @@ import { CinemaMode } from './components/CinemaMode';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { TrackList } from './components/TrackList';
 import { useRadioStore } from './lib/store';
-import { Radio, Heart, Globe, ShieldCheck, Sparkles, Volume2 } from 'lucide-react';
+import { Radio, Heart, Globe, ShieldCheck, Sparkles, Volume2, Play, X } from 'lucide-react';
 
 export default function App() {
   const {
@@ -34,11 +34,16 @@ export default function App() {
 
   const currentTrack = tracks[currentTrackIndex];
 
+  // Detecta se veio de um link compartilhado
+  const [sharedTrackId, setSharedTrackId] = useState<string | null>(null);
+  const [dismissedBanner, setDismissedBanner] = useState(false);
+
   // Auto-play da música compartilhada via link (?track=track-XXX)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const trackId = params.get('track');
     if (trackId) {
+      setSharedTrackId(trackId);
       const index = tracks.findIndex((t) => t.id === trackId);
       if (index !== -1) {
         playTrack(index);
@@ -102,6 +107,50 @@ export default function App() {
 
       {/* Top Navbar */}
       <Navbar />
+
+      {/* Banner de música compartilhada */}
+      {sharedTrackId && !dismissedBanner && currentTrack && (
+        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+          <div className="w-full rounded-2xl p-4 bg-gradient-to-r from-cyan-600/20 via-indigo-600/20 to-pink-600/20 border border-cyan-500/30 text-white backdrop-blur-2xl shadow-2xl shadow-cyan-500/10 flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+            <div className="flex items-center gap-4">
+              <img
+                src={currentTrack.coverUrl}
+                alt={currentTrack.title}
+                referrerPolicy="no-referrer"
+                className="w-14 h-14 rounded-xl object-cover border-2 border-cyan-400/50 shadow-lg shrink-0"
+              />
+              <div>
+                <div className="flex items-center gap-2 text-xs text-cyan-300 font-mono font-bold uppercase tracking-wider mb-0.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Música compartilhada com você
+                </div>
+                <h3 className="text-lg font-bold text-white leading-tight">
+                  {currentTrack.title}
+                </h3>
+                <p className="text-sm text-slate-300">
+                  {currentTrack.artist}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={togglePlay}
+                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400 text-white font-bold text-sm shadow-lg shadow-cyan-500/30 transition-all active:scale-95"
+              >
+                <Play className="w-5 h-5 fill-current" />
+                <span>Ouvir Agora</span>
+              </button>
+              <button
+                onClick={() => setDismissedBanner(true)}
+                className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-white/10 text-slate-400 hover:text-white transition-all"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content Area */}
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
