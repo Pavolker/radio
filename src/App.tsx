@@ -8,6 +8,7 @@ import { DynamicBackground } from './components/DynamicBackground';
 import { EqualizerModal } from './components/EqualizerModal';
 import { CinemaMode } from './components/CinemaMode';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
+import { TrackList } from './components/TrackList';
 import { useRadioStore } from './lib/store';
 import { Radio, Heart, Globe, ShieldCheck, Sparkles, Volume2 } from 'lucide-react';
 
@@ -95,6 +96,11 @@ export default function App() {
         {/* Centerpiece Hero Player */}
         <section id="player-hero">
           <MainPlayerCard />
+        </section>
+
+        {/* Spotify-style Track List */}
+        <section id="track-list-section">
+          <TrackList />
         </section>
 
         {/* Live Program Schedule & Upcoming Tracks */}
