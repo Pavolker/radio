@@ -257,6 +257,18 @@
       "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/ninguem-canta-pra-mim-soul.mp3",
       "accentColor": "#f43f5e",
       "secondaryColor": "#8b5cf6"
+    },
+    {
+      "id": "track-022",
+      "title": "Lance de Dados",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "duration": 209,
+      "year": 2025,
+      "coverUrl": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/lance-de-dados.mp3",
+      "accentColor": "#8b5cf6",
+      "secondaryColor": "#06b6d4"
     }
   ],
   "schedule": [
