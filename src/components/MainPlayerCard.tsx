@@ -14,7 +14,9 @@ import {
   Sparkles,
   Zap,
   Info,
-  Shuffle
+  Shuffle,
+  Share2,
+  Check
 } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 import { audioEngine } from '../lib/audioEngine';
@@ -58,6 +60,18 @@ export const MainPlayerCard: React.FC = () => {
 
   const currentTrack = tracks[currentTrackIndex] || tracks[0];
   const isFav = favorites.includes(currentTrack?.id);
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}?track=${currentTrack?.id}`;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.warn('Falha ao copiar link:', err);
+    }
+  };
 
   // Sync Audio Element with Zustand Store
   useEffect(() => {
@@ -345,6 +359,18 @@ export const MainPlayerCard: React.FC = () => {
                 className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-300 hover:text-cyan-400 transition-all active:scale-95"
               >
                 <FileText className="w-5 h-5" />
+              </button>
+
+              <button
+                onClick={handleShare}
+                title="Copiar link desta música"
+                className={`p-2.5 rounded-xl border transition-all active:scale-90 ${
+                  copied
+                    ? 'bg-emerald-950/80 border-emerald-500/50 text-emerald-400'
+                    : 'bg-slate-800 hover:bg-slate-700 border-white/10 text-slate-300 hover:text-cyan-400'
+                }`}
+              >
+                {copied ? <Check className="w-5 h-5" /> : <Share2 className="w-5 h-5" />}
               </button>
             </div>
 

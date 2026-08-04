@@ -20,6 +20,7 @@ export default function App() {
     toggleFavorite,
     nextTrack,
     previousTrack,
+    playTrack,
     currentTrackIndex,
     tracks,
     theme,
@@ -32,6 +33,18 @@ export default function App() {
   } = useRadioStore();
 
   const currentTrack = tracks[currentTrackIndex];
+
+  // Auto-play da música compartilhada via link (?track=track-XXX)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const trackId = params.get('track');
+    if (trackId) {
+      const index = tracks.findIndex((t) => t.id === trackId);
+      if (index !== -1) {
+        playTrack(index);
+      }
+    }
+  }, []);
 
   // Global Keyboard Shortcuts Listener
   useEffect(() => {

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Play, Heart, Music, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, Heart, Music, Clock, Share2, Check } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 
 export const TrackList: React.FC = () => {
@@ -12,10 +12,24 @@ export const TrackList: React.FC = () => {
     toggleFavorite
   } = useRadioStore();
 
+  const [copiedTrackId, setCopiedTrackId] = useState<string | null>(null);
+
   const formatDuration = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
     return `${m}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const handleShare = async (e: React.MouseEvent, trackId: string) => {
+    e.stopPropagation();
+    const shareUrl = `${window.location.origin}${window.location.pathname}?track=${trackId}`;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiedTrackId(trackId);
+      setTimeout(() => setCopiedTrackId(null), 2000);
+    } catch (err) {
+      console.warn('Falha ao copiar link:', err);
+    }
   };
 
   return (
@@ -113,8 +127,23 @@ export const TrackList: React.FC = () => {
                 {track.album}
               </span>
 
-              {/* Duration + Favorite */}
+              {/* Duration + Favorite + Share */}
               <div className="col-span-1 flex items-center justify-end gap-2">
+                <button
+                  onClick={(e) => handleShare(e, track.id)}
+                  title="Copiar link desta música"
+                  className={`p-1.5 rounded-lg transition-all ${
+                    copiedTrackId === track.id
+                      ? 'text-emerald-400 opacity-100'
+                      : 'text-slate-400 hover:text-cyan-400 opacity-0 group-hover:opacity-100'
+                  }`}
+                >
+                  {copiedTrackId === track.id ? (
+                    <Check className="w-3.5 h-3.5" />
+                  ) : (
+                    <Share2 className="w-3.5 h-3.5" />
+                  )}
+                </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
