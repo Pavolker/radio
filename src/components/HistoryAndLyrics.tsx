@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { History, FileText, X, Heart, Play, Music, UserCheck, Sparkles } from 'lucide-react';
+import { History, FileText, X, Heart, Play, Music, Sparkles } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 
 export const HistoryAndLyrics: React.FC = () => {
@@ -125,16 +125,6 @@ export const HistoryAndLyrics: React.FC = () => {
                   {currentTrack?.lyrics || 'Letra instrumental / Sem vocalização registrada.'}
                 </div>
               </div>
-
-              <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-pink-400 flex items-center gap-1.5">
-                  <UserCheck className="w-3.5 h-3.5" />
-                  Sobre o Artista
-                </h4>
-                <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/5 text-xs text-slate-300 leading-relaxed max-h-56 overflow-y-auto">
-                  {currentTrack?.artistBio || 'Artista independente participante da rede de transmissão Aetheria Digital.'}
-                </div>
-              </div>
             </div>
           </div>
         )}
@@ -174,15 +164,6 @@ export const HistoryAndLyrics: React.FC = () => {
                 <div className="p-5 rounded-2xl bg-slate-950 font-mono text-sm text-slate-200 whitespace-pre-line leading-relaxed border border-white/5">
                   {currentTrack?.lyrics || 'Música instrumental sem vocalização.'}
                 </div>
-              </div>
-
-              <div>
-                <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
-                  Biografia do Artista
-                </h4>
-                <p className="p-5 rounded-2xl bg-slate-950 text-sm text-slate-300 leading-relaxed border border-white/5">
-                  {currentTrack?.artistBio || 'Pioneiros da cena eletrônica digital e synthwave.'}
-                </p>
               </div>
             </div>
 
