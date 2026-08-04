@@ -136,19 +136,6 @@
       "lyrics": "[Verso Lento]\nAs malas estão no canto\nO trem vai apitar\nFica o pranto e o espanto\nMas preciso navegar.\n\n[Refrão]\nEu vou partir, não sei voltar\nO destino é quem vai guiar\nEu vou partir, levo no peito\nO que o tempo não pode apagar."
     },
     {
-      "id": "track-011",
-      "title": "Passo Lento",
-      "artist": "Pvolker",
-      "album": "Pvolker",
-      "duration": 251,
-      "year": 2025,
-      "coverUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=500&q=80",
-      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/passo-lento.mp3",
-      "accentColor": "#f59e0b",
-      "secondaryColor": "#6366f1",
-      "lyrics": "[Blues]\nCaminho em passo lento\nNa estrada de chão batido\nCarregando o sentimento\nDe um amor já despedido.\n\n[Refrão]\nPasso lento, passo certo\nCada dor vira canção\nO caminho é longo e aberto\nMas sigo com o coração."
-    },
-    {
       "id": "track-012",
       "title": "Vôo Alto",
       "artist": "Pvolker",
