@@ -93,9 +93,6 @@ export const CinemaMode: React.FC = () => {
 
         {/* Track Title, Artist & Lyrics */}
         <div className="md:col-span-7 space-y-4 text-left">
-          <span className="px-3 py-1 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-cyan-950 text-cyan-300 border border-cyan-500/30">
-            {currentTrack?.genre}
-          </span>
 
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white line-clamp-2">
             {currentTrack?.title}

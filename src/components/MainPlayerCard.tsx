@@ -286,9 +286,6 @@ export const MainPlayerCard: React.FC = () => {
           
           {/* Genre Badge & Album */}
           <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-cyan-950/80 text-cyan-300 border border-cyan-500/30">
-              {currentTrack?.genre}
-            </span>
             <span className="text-xs text-slate-400 font-mono">
               {currentTrack?.album} ({currentTrack?.year || 2026})
             </span>

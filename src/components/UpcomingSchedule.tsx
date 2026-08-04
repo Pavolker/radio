@@ -47,11 +47,7 @@ export const UpcomingSchedule: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Gênero Principal:</span>
-          <span className="text-cyan-300 font-medium">{currentShow?.genre}</span>
         </div>
-      </div>
 
       {/* Upcoming Tracks Lineup */}
       <div className="lg:col-span-7 rounded-3xl p-6 backdrop-blur-xl bg-slate-900/80 border border-white/10 shadow-xl text-white">
@@ -96,9 +92,6 @@ export const UpcomingSchedule: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-slate-400 px-2 py-0.5 rounded bg-slate-900 border border-white/5 hidden sm:inline">
-                  {track.genre}
-                </span>
                 <span className="text-xs font-mono text-slate-500">
                   {Math.floor(track.duration / 60)}:{(track.duration % 60).toString().padStart(2, '0')}
                 </span>

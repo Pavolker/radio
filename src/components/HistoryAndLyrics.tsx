@@ -161,9 +161,6 @@ export const HistoryAndLyrics: React.FC = () => {
                 className="w-16 h-16 rounded-2xl object-cover border border-white/10 shadow-lg"
               />
               <div>
-                <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">
-                  {currentTrack?.genre}
-                </span>
                 <h3 className="text-2xl font-black text-white">{currentTrack?.title}</h3>
                 <p className="text-sm text-slate-300 font-medium">{currentTrack?.artist}</p>
               </div>
