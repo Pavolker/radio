@@ -21,18 +21,16 @@
   "tracks": [
     {
       "id": "track-001",
-      "title": "A Doença Chegou",
+      "title": "Bom Igual Coco",
       "artist": "Angélica Sátiro",
       "album": "Angélica Sátiro",
       "genre": "MPB / Blues",
       "duration": 195,
       "year": 2025,
       "coverUrl": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=500&q=80",
-      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/a-doenca-chegou.mp3",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/bom-igual-coco.mp3",
       "accentColor": "#ec4899",
-      "secondaryColor": "#06b6d4",
-      "lyrics": "[Instrumental]\n\nA doença chegou de mansinho\nLevou o que tinha valor\nFicou o silêncio e o caminho\nE a força que vem da dor.\n\n[Refrão]\nMesmo na noite mais escura\nHá uma chama que não se apaga\nA doença chegou, mas não venceu\nQuem ficou de pé sou eu.",
-      "artistBio": "Angélica Sátiro é cantora e compositora brasileira com forte influência de MPB, blues e poesia. Suas canções transitam entre a dor e a superação com letras profundas e melodias marcantes."
+      "secondaryColor": "#06b6d4"
     },
     {
       "id": "track-002",
