@@ -8,7 +8,6 @@ import { DynamicBackground } from './components/DynamicBackground';
 import { EqualizerModal } from './components/EqualizerModal';
 import { CinemaMode } from './components/CinemaMode';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
-import { AIRadioHostBanner } from './components/AIRadioHostBanner';
 import { useRadioStore } from './lib/store';
 import { Radio, Heart, Globe, ShieldCheck, Sparkles, Volume2 } from 'lucide-react';
 
@@ -92,9 +91,6 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        
-        {/* AI Radio Host Banner */}
-        <AIRadioHostBanner />
 
         {/* Centerpiece Hero Player */}
         <section id="player-hero">
