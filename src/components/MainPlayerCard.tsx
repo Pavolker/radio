@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   Play,
   Pause,
@@ -9,11 +9,6 @@ import {
   Heart,
   FileText,
   Clock,
-  Radio,
-  Sliders,
-  Sparkles,
-  Zap,
-  Info,
   Shuffle,
   Share2,
   Check
@@ -42,41 +37,75 @@ export const MainPlayerCard: React.FC = () => {
     sleepTimerSecondsLeft,
     setSleepTimer,
     decrementSleepTimer,
-    currentBitrate,
-    setBitrate,
     isLiveMode,
     toggleLiveMode,
     setLyricsOpen,
-    stationInfo,
     isShuffled,
     toggleShuffle,
-    reshuffle
+    stationInfo
   } = useRadioStore();
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  // Dual audio elements: current (playing) + next (preloading)
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
+  const nextAudioRef = useRef<HTMLAudioElement | null>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
   const [isHoveringVinyl, setIsHoveringVinyl] = useState(false);
+  const preloadedIndexRef = useRef<number>(-1);
 
   const currentTrack = tracks[currentTrackIndex] || tracks[0];
   const isFav = favorites.includes(currentTrack?.id);
   const [copied, setCopied] = useState(false);
 
-  const handleShare = async () => {
-    const shareUrl = `${window.location.origin}${window.location.pathname}?track=${currentTrack?.id}`;
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.warn('Falha ao copiar link:', err);
+  // --- Get next track index (respecting shuffle) ---
+  const getNextIndex = useCallback((): number => {
+    const state = useRadioStore.getState();
+    if (state.isShuffled) {
+      const nextShuffleIdx = (state.shuffleIndex + 1) % state.shuffleOrder.length;
+      return state.shuffleOrder[nextShuffleIdx];
     }
-  };
+    return (state.currentTrackIndex + 1) % state.tracks.length;
+  }, []);
 
-  // Sync Audio Element with Zustand Store
+  // --- Preload next track when current is 80% done ---
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = currentAudioRef.current;
+    if (!audio || !isPlaying || duration <= 0) return;
+
+    const progress = currentTime / duration;
+    if (progress < 0.7) return;
+
+    const nextIdx = getNextIndex();
+    if (nextIdx === preloadedIndexRef.current) return;
+
+    const nextTrack = tracks[nextIdx];
+    if (!nextTrack) return;
+
+    const nextAudio = nextAudioRef.current;
+    if (!nextAudio) return;
+
+    // Preload next track
+    nextAudio.src = nextTrack.audioUrl;
+    nextAudio.load();
+    nextAudio.volume = 0; // silent while preloading
+    preloadedIndexRef.current = nextIdx;
+
+    // eslint-disable-next-line no-console
+    console.log('[Gapless] Preloaded:', nextTrack.title);
+  }, [currentTime, duration, isPlaying, tracks, getNextIndex]);
+
+  // --- Sync Current Audio Element with Zustand Store ---
+  useEffect(() => {
+    const audio = currentAudioRef.current;
     if (!audio) return;
+
+    // Only reconnect WebAudio if this is a NEW track (not just play/pause)
+    if (!audio.src || !audio.src.includes(currentTrack?.audioUrl || '')) {
+      audio.src = currentTrack?.audioUrl || '';
+      audio.load();
+      // Reset preload state since we're changing tracks
+      preloadedIndexRef.current = -1;
+    }
 
     audioEngine.connectAudioElement(audio);
 
@@ -96,11 +125,11 @@ export const MainPlayerCard: React.FC = () => {
       audio.pause();
       setStreamStatus('paused');
     }
-  }, [isPlaying, currentTrackIndex, setStreamStatus]);
+  }, [isPlaying, currentTrackIndex, setStreamStatus, currentTrack?.audioUrl]);
 
-  // Handle Track Time Updates & Auto-Next
+  // --- Handle Track Time Updates & Auto-Next (Gapless) ---
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = currentAudioRef.current;
     if (!audio) return;
 
     const handleTimeUpdate = () => {
@@ -109,7 +138,43 @@ export const MainPlayerCard: React.FC = () => {
     };
 
     const handleEnded = () => {
-      nextTrack();
+      // GAPLESS TRANSITION: if nextAudio is preloaded and ready, swap immediately
+      const nextAudio = nextAudioRef.current;
+      const nextIdx = preloadedIndexRef.current;
+      const nextTrackData = nextIdx >= 0 ? tracks[nextIdx] : null;
+
+      if (
+        nextAudio &&
+        nextTrackData &&
+        nextAudio.src.includes(nextTrackData.audioUrl) &&
+        nextAudio.readyState >= 2
+      ) {
+        // Swap audio elements
+        const current = currentAudioRef.current;
+        if (current) {
+          current.pause();
+        }
+
+        // Swap the refs by swapping src and playing
+        if (current) {
+          current.src = nextAudio.src; // inherit the loaded audio
+          current.currentTime = 0;
+          const playPromise = current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => { /* ignore */ });
+          }
+        }
+
+        // Clear nextAudio for next preload
+        nextAudio.src = '';
+        preloadedIndexRef.current = -1;
+
+        // Advance Zustand state
+        nextTrack();
+      } else {
+        // Fallback: normal nextTrack if preload failed
+        nextTrack();
+      }
     };
 
     const handleError = () => {
@@ -125,7 +190,7 @@ export const MainPlayerCard: React.FC = () => {
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('error', handleError);
     };
-  }, [nextTrack, setStreamStatus, currentTrack]);
+  }, [nextTrack, setStreamStatus, currentTrack, tracks]);
 
   // Handle Sleep Timer Countdown Interval
   useEffect(() => {
@@ -145,9 +210,20 @@ export const MainPlayerCard: React.FC = () => {
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = parseFloat(e.target.value);
-    if (audioRef.current) {
-      audioRef.current.currentTime = newTime;
+    if (currentAudioRef.current) {
+      currentAudioRef.current.currentTime = newTime;
       setCurrentTime(newTime);
+    }
+  };
+
+  const handleShare = async () => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}?track=${currentTrack?.id}`;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.warn('Falha ao copiar link:', err);
     }
   };
 
@@ -155,7 +231,7 @@ export const MainPlayerCard: React.FC = () => {
 
   return (
     <div className="relative w-full max-w-4xl mx-auto rounded-3xl p-6 sm:p-8 backdrop-blur-2xl bg-slate-900/80 border border-white/10 shadow-2xl shadow-slate-950/80 overflow-hidden text-white transition-all duration-500">
-      
+
       {/* Dynamic Ambient Blur Glow behind card */}
       <div
         className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl opacity-30 pointer-events-none transition-all duration-700"
@@ -166,12 +242,18 @@ export const MainPlayerCard: React.FC = () => {
         style={{ backgroundColor: currentTrack?.secondaryColor || '#06b6d4' }}
       />
 
-      {/* Hidden Audio Element */}
+      {/* Current Audio Element (playing) */}
       <audio
-        ref={audioRef}
-        src={currentTrack?.audioUrl}
+        ref={currentAudioRef}
         preload="auto"
         crossOrigin="anonymous"
+      />
+      {/* Next Audio Element (preloading, hidden) */}
+      <audio
+        ref={nextAudioRef}
+        preload="auto"
+        crossOrigin="anonymous"
+        style={{ display: 'none' }}
       />
 
       {/* Top Deck Header Info */}
@@ -242,7 +324,7 @@ export const MainPlayerCard: React.FC = () => {
 
       {/* Main Deck Layout: Left Vinyl Art + Right Track Details */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
-        
+
         {/* Left: Spinning Vinyl Disc & Album Art */}
         <div className="md:col-span-5 flex flex-col items-center justify-center">
           <div
@@ -297,7 +379,7 @@ export const MainPlayerCard: React.FC = () => {
 
         {/* Right: Track Information & Player Controls */}
         <div className="md:col-span-7 flex flex-col justify-center gap-4">
-          
+
           {/* Genre Badge & Album */}
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-400 font-mono">
@@ -338,7 +420,7 @@ export const MainPlayerCard: React.FC = () => {
 
           {/* Primary Controls Row */}
           <div className="flex items-center justify-between gap-4 pt-2">
-            
+
             {/* Left Tools: Favorite & Lyrics */}
             <div className="flex items-center gap-2">
               <button

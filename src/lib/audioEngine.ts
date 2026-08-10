@@ -1,5 +1,13 @@
 import { AudioEqualizerBands } from '../types';
 
+function isMobileDevice(): boolean {
+  return (
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(pointer: coarse)').matches ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+  );
+}
+
 class WebAudioEngine {
   private audioCtx: AudioContext | null = null;
   private analyser: AnalyserNode | null = null;
@@ -8,6 +16,11 @@ class WebAudioEngine {
   private gainNode: GainNode | null = null;
   private isConnected = false;
   private currentElement: HTMLAudioElement | null = null;
+  private isMobile = isMobileDevice();
+
+  // Reutilizar buffers (evita garbage collection)
+  private freqBuffer: Uint8Array | null = null;
+  private waveBuffer: Uint8Array | null = null;
 
   // Fallback synthetic wave generator if CORS prevents WebAudio capture
   private fallbackPhase = 0;
@@ -20,12 +33,18 @@ class WebAudioEngine {
       if (AudioContextClass) {
         this.audioCtx = new AudioContextClass();
         this.analyser = this.audioCtx.createAnalyser();
-        this.analyser.fftSize = 256;
+        // Mobile: FFT menor = menos processamento
+        this.analyser.fftSize = this.isMobile ? 128 : 256;
         this.analyser.smoothingTimeConstant = 0.8;
+
+        // Pré-alocar buffers reutilizáveis
+        const binCount = this.analyser.frequencyBinCount;
+        this.freqBuffer = new Uint8Array(binCount);
+        this.waveBuffer = new Uint8Array(binCount);
 
         this.gainNode = this.audioCtx.createGain();
 
-        // Build 5-band Equalizer
+        // Build 5-band Equalizer — apenas desktop ativa por padrão
         const frequencies = [60, 230, 910, 3600, 14000];
         this.eqFilters = frequencies.map((freq) => {
           const filter = this.audioCtx!.createBiquadFilter();
@@ -35,12 +54,14 @@ class WebAudioEngine {
           return filter;
         });
 
-        // Chain Filters: Gain -> EQ1 -> EQ2 -> EQ3 -> EQ4 -> EQ5 -> Analyser -> Destination
+        // Chain: Gain -> EQ (se não mobile) -> Analyser -> Destination
         let prevNode: AudioNode = this.gainNode;
-        this.eqFilters.forEach((filter) => {
-          prevNode.connect(filter);
-          prevNode = filter;
-        });
+        if (!this.isMobile) {
+          this.eqFilters.forEach((filter) => {
+            prevNode.connect(filter);
+            prevNode = filter;
+          });
+        }
         prevNode.connect(this.analyser);
         this.analyser.connect(this.audioCtx.destination);
       }
@@ -76,42 +97,41 @@ class WebAudioEngine {
   }
 
   public getFrequencyData(): Uint8Array {
-    if (this.analyser) {
-      const data = new Uint8Array(this.analyser.frequencyBinCount);
-      this.analyser.getByteFrequencyData(data);
-      // Check if data is non-zero
-      let sum = 0;
-      for (let i = 0; i < data.length; i++) sum += data[i];
-      if (sum > 0) return data;
+    if (!this.analyser || !this.freqBuffer) {
+      return this.generateSyntheticFrequencies();
     }
-    // Return synthetic lively frequencies if silent or cross-origin stream
+    this.analyser.getByteFrequencyData(this.freqBuffer);
+    // Check if data is non-zero
+    let sum = 0;
+    for (let i = 0; i < this.freqBuffer.length; i++) sum += this.freqBuffer[i];
+    if (sum > 0) return this.freqBuffer;
     return this.generateSyntheticFrequencies();
   }
 
   public getWaveformData(): Uint8Array {
-    if (this.analyser) {
-      const data = new Uint8Array(this.analyser.frequencyBinCount);
-      this.analyser.getByteTimeDomainData(data);
-      let isFlat = true;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i] !== 128) {
-          isFlat = false;
-          break;
-        }
-      }
-      if (!isFlat) return data;
+    if (!this.analyser || !this.waveBuffer) {
+      return this.generateSyntheticWaveform();
     }
+    this.analyser.getByteTimeDomainData(this.waveBuffer);
+    let isFlat = true;
+    for (let i = 0; i < this.waveBuffer.length; i++) {
+      if (this.waveBuffer[i] !== 128) {
+        isFlat = false;
+        break;
+      }
+    }
+    if (!isFlat) return this.waveBuffer;
     return this.generateSyntheticWaveform();
   }
 
   public setEqualizerBands(bands: AudioEqualizerBands) {
-    if (this.eqFilters.length === 5) {
-      this.eqFilters[0].gain.value = bands.b60;
-      this.eqFilters[1].gain.value = bands.b230;
-      this.eqFilters[2].gain.value = bands.b910;
-      this.eqFilters[3].gain.value = bands.b3k6;
-      this.eqFilters[4].gain.value = bands.b14k;
-    }
+    // Mobile: equalizador não ativo por padrão (evita chain extra de filtros)
+    if (this.isMobile || this.eqFilters.length !== 5) return;
+    this.eqFilters[0].gain.value = bands.b60;
+    this.eqFilters[1].gain.value = bands.b230;
+    this.eqFilters[2].gain.value = bands.b910;
+    this.eqFilters[3].gain.value = bands.b3k6;
+    this.eqFilters[4].gain.value = bands.b14k;
   }
 
   public setGainVolume(volume: number) {

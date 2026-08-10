@@ -1,14 +1,39 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { useRadioStore } from '../lib/store';
+
+// Detecta se é dispositivo mobile (touch + viewport pequeno)
+function isMobileDevice(): boolean {
+  return (
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(pointer: coarse)').matches ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+  );
+}
 
 export const DynamicBackground: React.FC = () => {
   const { tracks, currentTrackIndex, isPlaying, theme } = useRadioStore();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const mobile = useMemo(() => isMobileDevice(), []);
 
   const currentTrack = tracks[currentTrackIndex];
   const accentColor = currentTrack?.accentColor || '#ec4899';
   const secondaryColor = currentTrack?.secondaryColor || '#06b6d4';
 
+  // --- MOBILE: CSS animated gradient (GPU-accelerated, zero JS per frame) ---
+  if (mobile) {
+    return (
+      <div
+        className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000 opacity-90"
+        style={{
+          background: `linear-gradient(135deg, #050505 0%, ${accentColor}08 35%, ${secondaryColor}06 65%, #050505 100%)`,
+          backgroundSize: '400% 400%',
+          animation: isPlaying ? 'mobileAurora 12s ease infinite' : 'mobileAurora 20s ease infinite',
+        }}
+      />
+    );
+  }
+
+  // --- DESKTOP: Canvas com animação full (performance desktop aguenta) ---
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
