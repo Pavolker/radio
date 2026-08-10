@@ -7,7 +7,7 @@ import type {
 } from '../types';
 
 // Importa o catálogo do JSON (fonte única de verdade)
-import catalog from '../../public/radio-catalog.json';
+import catalog from './radio-catalog.json';
 
 // Validação básica da estrutura do JSON
 function validateCatalog(data: any): data is {

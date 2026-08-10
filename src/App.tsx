@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { MainPlayerCard } from './components/MainPlayerCard';
 import { UpcomingSchedule } from './components/UpcomingSchedule';
-import { HistoryAndLyrics } from './components/HistoryAndLyrics';
+import { PoetryDisplay } from './components/PoetryDisplay';
+import { RecentHistory } from './components/RecentHistory';
 import { LiveCommunityChat } from './components/LiveCommunityChat';
 import { DynamicBackground } from './components/DynamicBackground';
 import { EqualizerModal } from './components/EqualizerModal';
@@ -160,6 +161,11 @@ export default function App() {
           <MainPlayerCard />
         </section>
 
+        {/* Poem & Biography — Primeira Classe */}
+        <section id="poetry-section">
+          <PoetryDisplay />
+        </section>
+
         {/* Spotify-style Track List */}
         <section id="track-list-section">
           <TrackList />
@@ -173,7 +179,7 @@ export default function App() {
         {/* Two-Column Grid: Recently Played History & Community Live Chat */}
         <section id="community-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-6">
-            <HistoryAndLyrics />
+            <RecentHistory />
           </div>
           <div className="lg:col-span-6">
             <LiveCommunityChat />
