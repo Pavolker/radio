@@ -45,12 +45,19 @@ export default function App() {
     const trackId = params.get('track');
     if (trackId) {
       setSharedTrackId(trackId);
-      const index = tracks.findIndex((t) => t.id === trackId);
-      if (index !== -1) {
-        playTrack(index);
-      }
+      // Aguardar um tick para o store inicializar
+      const timeout = setTimeout(() => {
+        const { tracks } = useRadioStore.getState();
+        const index = tracks.findIndex((t) => t.id === trackId);
+        if (index !== -1) {
+          playTrack(index);
+          // Limpar a URL para não ficar com ?track= na barra
+          window.history.replaceState({}, '', window.location.pathname);
+        }
+      }, 100);
+      return () => clearTimeout(timeout);
     }
-  }, []);
+  }, [tracks, playTrack]);
 
   // Global Keyboard Shortcuts Listener
   useEffect(() => {
