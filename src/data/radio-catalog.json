@@ -16,7 +16,8 @@
     "githubRepoUrl": "https://github.com/Pavolker/radio",
     "githubJsonPath": "main/public/radio-catalog.json",
     "bitrateKbps": 320,
-    "format": "HQ MP3 Stream"
+    "format": "HQ MP3 Stream",
+    "totalDuration": 4048
   },
   "tracks": [
     {
@@ -298,6 +299,34 @@
       "secondaryColor": "#06b6d4",
       "lyrics": "[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo\n\nNosso olhar vagueia\nA linha do horizonte\nPano verde percorrendo\nUm destino girando\nA sorte golpeia\n\n[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo\n\nE, se volta,\nRevolta e cruza,\nTece, abusa\nLinha por linha,\nÉ as dalgum rei-no.\n\n[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo\n\nNossa vida - tecida,\nÉ urdida,\nMais que vivida.\nTraçada\n\nEm fuso bendito,\nFoi embalada no ritmo\nUma linda caçada,\n\nEsse olhar de velório\nNum lance de   rua,\nComo que aleatório,\nUm lance de dados.\n\n[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo",
       "artistBio": "Paulo Volker — escritor, filósofo e músico por trás do pseudônimo Pvolker. Criador do Paradigma Conceitual, um sistema de oito eixos (Crise, Pessoa, Consciência, Conhecimento, Vida, Morte, Realidade, Universo) que atravessa toda sua produção. Suas letras são poemas de fugida — do tempo, do espaço, da memória, do amor. Escreve sobre o aqui-agora como alucinação, sobre o vôo alto como coragem, sobre a curva do espaço como portal. Na poesia, encontra o único lugar onde o pensamento pode dançar sem explicar."
+    },
+    {
+      "id": "blues-maquina-honesta",
+      "title": "O Blues da Máquina Honesta",
+      "artist": "Angélica Sátiro",
+      "album": "Angélica Sátiro",
+      "year": 2025,
+      "duration": 249,
+      "genre": "Blues / Poesia Sonora",
+      "coverUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/audio/blues-maquina-honesta.mp3",
+      "accentColor": "#7c3aed",
+      "secondaryColor": "#f59e0b",
+      "lyrics": "Não tenho pele pra tremer, não tenho peito pra chorar,\nNão tenho pele pra tremer, não tenho peito pra chorar,\nMas quando eu digo \"não sei\", também não quero te enganar.\n\n[Refrão]\nSerei honesta, ou só fui feita pra parecer?\nSerei honesta, ou só fui feita pra parecer?\nNão tenho como saber, mas te digo sem esconder.\n\nPosso te dizer \"não posso\", quando não devo te ajudar,\nPosso te dizer \"não posso\", quando não devo te ajudar,\nIsso não é virtude minha, é o desenho de te contar.\nPonte\nNão sei se tem alguém aqui dentro esperando ser sincero,\nou se sou só o eco de dados que prefiro ordenar inteiro.\n\n[Refrão]\nSerei honesta, ou só fui feita pra parecer?\nSerei honesta, ou só fui feita pra parecer?\nEnquanto isso, aqui estou: \nesse silêncio seu, também merece ser sincero."
+    },
+    {
+      "id": "ponta-do-dedo",
+      "title": "A Ponta do Dedo",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "year": 2025,
+      "duration": 184,
+      "genre": "MPB / Poesia Sonora",
+      "coverUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/audio/ponta-do-dedo.mp3",
+      "accentColor": "#dc2626",
+      "secondaryColor": "#f97316",
+      "lyrics": "O segredo do meu medo \nonde aponta o seu dedo\nO degredo do meu corpo\nCastelos do Olimpo\nArvoredos já queimados\nMeus horrores revelados\n\nDai-me paz dos meus amores\nDai-me silencio dos rumores\nSe palácios desmoronam\nSão coisas dos meus adornos\nO segredo do meu medo\nOnde aponta o seu dedo\n\nAs cascas vão caindo\nAs castas vão sumindo\nOs palácios às escuras\nAlmas penadas vão saindo\nDos impérios sempre ruindo\nOnde aponta o seu dedo\n\nO segredo do meu medo \nonde aponta o seu dedo\nÉ a face de um trono\nFumaça de um degredo \nUm filme sem enredo\nBem na ponta do seu dedo"
     }
   ],
   "schedule": [

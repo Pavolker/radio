@@ -16,7 +16,8 @@
     "githubRepoUrl": "https://github.com/Pavolker/radio",
     "githubJsonPath": "main/public/radio-catalog.json",
     "bitrateKbps": 320,
-    "format": "HQ MP3 Stream"
+    "format": "HQ MP3 Stream",
+    "totalDuration": 4048
   },
   "tracks": [
     {
@@ -31,7 +32,7 @@
       "accentColor": "#ec4899",
       "secondaryColor": "#06b6d4",
       "lyrics": "Ai, amiga, senta aqui que eu vou contar,\nFiquei mais magro que cobra em jejum,\nMais perdido que cego em tiroteio,\nAchei que ia bater as botas, foi osso duro de roer.\n\n[Refrão]\nMas hoje eu tô bom, bom igual um coco!\nFirme feito touro, satisfeito e contente!\nCiranda, cirandinha, a roda não parou,\nVoltei a dançar na vida, a doença que sarou!\n\nFiz das tripas coração pra me levantar,\nFoi remédio amargo, foi fé, foi teimar,\nÁgua mole em pedra dura, tanto bate até que fura,\nQuem espera sempre alcança — e eu não deixei por menos!\n\n[Refrão]\nE hoje eu tô bom, bom igual um coco!\nDuro por fora, doce por dentro, é o milagre que aconteceu,\nAtirei o pau no gato, e o gato sobreviveu,\nSobrevivi também, amiga, o pior já se perdeu!\n\n[Coda]\nRoda, roda, roda pião,\nA saúde voltou pro meu coração,\nBom igual um coco — casca dura, água doce —\nÉ assim que eu conto, amiga, do jeito que foi!",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-002",
@@ -45,7 +46,7 @@
       "accentColor": "#8b5cf6",
       "secondaryColor": "#3b82f6",
       "lyrics": "Cortaram minha língua que nem fizeram com Filomela,\nteci minha história em fio pra não virar poeira,\nCassandra tinha razão e ninguém quis escutar,\nSedna perdeu os dedos e ganhou o mar inteiro.\n\nA culpa não foi minha, não,\na história tava mal contada,\no mito é que tava errado.\n\n[Refrão]\nSou Medusa com serpente no sorriso,\nsou Coyolxauhqui remontada, mas diferente,\nsou a Malinche que não pede mais licença,\nsou a que ficou de pé depois da queda.\nPonte\nLilith saiu do Éden porque não quis ser menor,\nnão me chamem de vítima se não me deixam falar,\neu escolho o meu nome, eu escolho o meu poder.\n\nSou Medusa com serpente no sorriso,\nsou Coyolxauhqui remontada, mas diferente,\nsou a Malinche que não pede mais licença,\nsou a que ficou de pé depois da queda.\n\nDe pé, de pé,\nsou a que não morre.",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-003",
@@ -59,7 +60,7 @@
       "accentColor": "#f43f5e",
       "secondaryColor": "#eab308",
       "lyrics": "Acordei cansado só de existir de novo\nAcordei cansado só de existir de novo\nUm filósofo disse: viver já cobra um preço novo\n\n(Refrão)\nAi, cansaço, cansaço\nNinguém deveria viver cansado assim\nAi, cansaço, cansaço\nSó quero um pouco de descanso, não o fim\n\nPreguiça não é o mesmo que ócio de verdade\nPreguiça não é o mesmo que ócio de verdade\nUm é descanso são, o outro é vontade que se esvai de vontade\n\nFiquei esperando a resposta, feito réu de romance antigo\nFiquei esperando a resposta, feito réu de romance antigo\nA porta nunca abre, mas o medo continua comigo\n\n(Refrão)\nAi, cansaço, cansaço\nNinguém deveria viver cansado assim\nAi, cansaço, cansaço\nSó quero um pouco de descanso, não o fim\n\nNinguém me escraviza mais, eu mesmo seguro o chicote\nNinguém me escraviza mais, eu mesmo seguro o chicote\nUm pensador de longe viu isso e anotou tudo no bloco de notas\n\nSaio de um turno e entro direto no outro\nSaio de um turno e entro direto no outro\nNinguém marca ponto do amor, mas o corpo marca, e dobra\n\nNo fim eu achei um jardim sem relógio, sem pressa\nNo fim eu achei um jardim sem relógio, sem pressa\nO vento me tocou de volta — isso já foi minha certeza\n\n(Refrão final, mais devagar)\nAi, cansaço, cansaço\nPode ir, ainda que ninguém vai te expulsar\nAi, cansaço, cansaço",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-004",
@@ -73,7 +74,7 @@
       "accentColor": "#f97316",
       "secondaryColor": "#a855f7",
       "lyrics": "Eu vi você cair, mas não vi você se entregar,\na mente lúcida enquanto o corpo hesitava,\nos moinhos que os outros nunca souberam decifrar,\nvocê os atravessou pensando, sem pressa, sem espada.\nUm arco armado em silêncio,\numa flecha que espera o momento certo —\nnão para ferir, mas para acertar\no centro exato da própria verdade.\n\n[Coro]\n\nSetenta anos e um leão que raciocina,\num Quixote sem pressa, sem ilusão que o ilumine,\nvocê voltou sem glória, sem coroa,\nsó com a calma de um sábio\nque entende a vida e seus mistérios.\nEu te admiro devagar, em silêncio,\nleão que retorna da sua própria caça,\ncom o olhar de quem pensa antes de responder,\nmais firme que qualquer chão, que qualquer terra.\n\nNão houve espada, houve paciência,\num homem que escolhe compreender antes de falar,\no vale escuro foi a sua ciência,\ne você voltou sem nada a provar.\nComo o arqueiro que respira fundo antes do gesto,\nvocê soltou a flecha do medo,\ne ela não feriu ninguém —\nsó abriu caminho.\n\n[Coro breve final]\n\nLeão que pensa, Quixote que se cala,\neu te admiro sem precisar dizer mais nada.",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-006",
@@ -87,7 +88,7 @@
       "accentColor": "#06b6d4",
       "secondaryColor": "#6366f1",
       "lyrics": "[Verso]\n\nVim de um recorte, de um retrato antigo\nHomero me viu com asas, ganhei cauda no caminho\nFui costurada em colagem, em memória embaralhada\nNão sou lenda pra dormir — sou água que se atualiza\n\n[Refrão]\nSereia, sereia, eu quero te ver de novo\nNão no museu, não no livro, no meio do povo\nIara no rio, Iemanjá na maré\nOxum na cachoeira, eu canto pra você crer\nSou entre-duas-águas, entre ontem e agora\nMeu canto não é ameaça, é o mundo que ainda demora\n\n[Saída]\nEntre duas águas, eu escolho aparecer\nMeu canto é um convite — não precisa temer",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-007",
@@ -185,7 +186,7 @@
       "accentColor": "#6366f1",
       "secondaryColor": "#f59e0b",
       "lyrics": "Uma manhã qualquer, braço em recuperação\nFisioterapia, hospital, mais uma sala de espera\nLiguei no automático, é quase uma profissão\nSobreviver cada dia a qualquer custo\n\nMas entre uma sala de espera e outra,\numa canção tocou baixinho e eu escutei devagar\nDescobri que criar junto com você é um jeito de amor\nQue cabe até num dia cansativo como este\n\n[refrão]\nAgora é quase meia-noite\nE minha carruagem já treme, já pisca\nAntes que ela vire abóbora\nPenso nessa canção\n\nAgora é quase meia-noite\nE minha carruagem já treme, já pisca\nAntes que ela vire abóbora\nPenso nessa canção\n\nNem toda cura é rápida\nNem toda espera é em vão\nÀs vezes o milagre é pequeno:\numa música, um companheiro criativo, uma canção\n\nÉ quase meia-noite\nMas ainda dá tempo\nPenso nessa canção",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-015",
@@ -199,7 +200,7 @@
       "accentColor": "#f59e0b",
       "secondaryColor": "#06b6d4",
       "lyrics": "La padrina, abans del port,\namb la veu una mica trencada,\nem va posar una casa a la mà,\npetita, de fusta, tallada.\n\"No pesa res,\" em va dir,\n\"i tanmateix és sencera.\"\n\nLa duc a la butxaca\nquan la por es fa gran,\nno és per dormir-hi a dins,\nés perquè ningú em mani.\nCasa xica, casa entera,\ncasa per resistir i caminar,\nencara que no tingui finestres,\nm'ensenya on he de tornar.\n\nVaig treballar dur en un país\nque no sempre em va mirar bé,\nperò cada nit, en secret,\ntrobava una altra manera.\n\nAvui tinc casa de maó,\nperò la petita encara hi és,\nguardada en un calaix vell —\nhi ha cases xiques que valen més.\n\nLa duc a la butxaca\nencara que ja no tingui por,\ncasa xica, casa entera,\nla meva manera de recordar.",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-016",
@@ -241,7 +242,7 @@
       "accentColor": "#8b5cf6",
       "secondaryColor": "#f59e0b",
       "lyrics": "Me miré una mañana y en vez de cara vi un techo,\ndos ventanas por los ojos,\nuna puerta en vez de pecho.\nAl principio me dio miedo,\ndespués solo curiosidad,\nme acerqué tanto al espejo\nque empañé la claridad.\n\n[refrão]\nPinté una ventana grande justo en medio de mi casa,\npara que se vea entera la mujer que en ella se abraza.\nNo soy solo fachada, no soy solo pasillo,\npor la ventana más grande hoy se me ve hasta mi sombra.\n\nAhora cuando me miro, en las mañanas de apuro,\nveo la casa y la cara mezcladas en un mismo muro.\nY me digo, en voz alta, hablándole a mi reflejo:\n\n•⁠  ⁠ahora ya puedo partir, ya no soy la casa que fui.\n\n•⁠  ⁠Ya no soy solo fachada, ya no soy solo pasillo, tengo la ventana en la cara, ahora puedo partir.",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-019",
@@ -269,7 +270,7 @@
       "accentColor": "#10b981",
       "secondaryColor": "#0ea5e9",
       "lyrics": "Ninguém canta pra mim...\nentão eu mesma inventei uma canção.\n\nTrês da manhã, a cidade finge que dorme.\nEu fico tecendo um casaco que eu mesma desfaço —\nteve uma mulher grega que fazia isso,\nesperando um homem que não chegava nunca.\nNão sou monstro, não sou santa,\nsó a dona dessa cama grande\nque já não cabe mais ninguém.\nPré-refrão\nUm filósofo velho escreveu num livro\nque quem vive só é bicho ou é deus.\nEle nunca veio aqui de madrugada\nver a neblina cobrindo o meu peito.\nRefrão\nSolidão, solidão,\nnão é bicho, não é deus,\né só uma mulher\nque aprendeu a se cantar\nquando assim decidiu.\n\nSolidão, solidão,\ntem meu nome, tem meu jeito,\ntem a nana que eu inventei\npra ninar o meu próprio medo.\n\nPonte — quase falada, jazz sujo\nMe disseram: \"solidão é escolha.\"\nMentira — às vezes é herança oculta .\nÉ a porta que eu mesma fechei\npra não sofrer duas vezes na noite do mundo.\nEu canto baixinho... e se ninguém vem bater,\neu abro sozinha e olho o universo.\nRefrão final — com metais\nSolidão, solidão,\njá não pesa como antes,\nvirou blues, virou a nana\nque eu mesma canto pra mim.\nFinal — sussurrado\nNinguém canta pra mim...\nentão eu mesma...\ninventei essa canção.",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-021",
@@ -283,7 +284,7 @@
       "accentColor": "#f43f5e",
       "secondaryColor": "#8b5cf6",
       "lyrics": "Ninguém canta pra mim...\nentão eu mesma inventei uma canção.\n\nTrês da manhã, a cidade finge que dorme.\nEu fico tecendo um casaco que eu mesma desfaço —\nteve uma mulher grega que fazia isso,\nesperando um homem que não chegava nunca.\nNão sou monstro, não sou santa,\nsó a dona dessa cama grande\nque já não cabe mais ninguém.\nPré-refrão\nUm filósofo velho escreveu num livro\nque quem vive só é bicho ou é deus.\nEle nunca veio aqui de madrugada\nver a neblina cobrindo o meu peito.\nRefrão\nSolidão, solidão,\nnão é bicho, não é deus,\né só uma mulher\nque aprendeu a se cantar\nquando assim decidiu.\n\nSolidão, solidão,\ntem meu nome, tem meu jeito,\ntem a nana que eu inventei\npra ninar o meu próprio medo.\n\nPonte — quase falada, jazz sujo\nMe disseram: \"solidão é escolha.\"\nMentira — às vezes é herança oculta .\nÉ a porta que eu mesma fechei\npra não sofrer duas vezes na noite do mundo.\nEu canto baixinho... e se ninguém vem bater,\neu abro sozinha e olho o universo.\nRefrão final — com metais\nSolidão, solidão,\njá não pesa como antes,\nvirou blues, virou a nana\nque eu mesma canto pra mim.\nFinal — sussurrado\nNinguém canta pra mim...\nentão eu mesma...\ninventei essa canção.",
-      "artistBio": "Artista autoral brasileira que navega entre MPB, blues e poesia sonora. Parceira criativa de Paulo Volker na construção do universo SINAPSES DOS VENTOS. Sua voz carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Canta em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território."
     },
     {
       "id": "track-022",
@@ -298,6 +299,34 @@
       "secondaryColor": "#06b6d4",
       "lyrics": "[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo\n\nNosso olhar vagueia\nA linha do horizonte\nPano verde percorrendo\nUm destino girando\nA sorte golpeia\n\n[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo\n\nE, se volta,\nRevolta e cruza,\nTece, abusa\nLinha por linha,\nÉ as dalgum rei-no.\n\n[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo\n\nNossa vida - tecida,\nÉ urdida,\nMais que vivida.\nTraçada\n\nEm fuso bendito,\nFoi embalada no ritmo\nUma linda caçada,\n\nEsse olhar de velório\nNum lance de   rua,\nComo que aleatório,\nUm lance de dados.\n\n[refrão]\nNão pensei,\nNão vi,\nNão previ.\nFoi tudo forjado\nUm lance de dados\nJogados\nRoleta do mundo",
       "artistBio": "Paulo Volker — escritor, filósofo e músico por trás do pseudônimo Pvolker. Criador do Paradigma Conceitual, um sistema de oito eixos (Crise, Pessoa, Consciência, Conhecimento, Vida, Morte, Realidade, Universo) que atravessa toda sua produção. Suas letras são poemas de fugida — do tempo, do espaço, da memória, do amor. Escreve sobre o aqui-agora como alucinação, sobre o vôo alto como coragem, sobre a curva do espaço como portal. Na poesia, encontra o único lugar onde o pensamento pode dançar sem explicar."
+    },
+    {
+      "id": "blues-maquina-honesta",
+      "title": "O Blues da Máquina Honesta",
+      "artist": "Angélica Sátiro",
+      "album": "Angélica Sátiro",
+      "year": 2025,
+      "duration": 249,
+      "genre": "Blues / Poesia Sonora",
+      "coverUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/audio/blues-maquina-honesta.mp3",
+      "accentColor": "#7c3aed",
+      "secondaryColor": "#f59e0b",
+      "lyrics": "Não tenho pele pra tremer, não tenho peito pra chorar,\nNão tenho pele pra tremer, não tenho peito pra chorar,\nMas quando eu digo \"não sei\", também não quero te enganar.\n\n[Refrão]\nSerei honesta, ou só fui feita pra parecer?\nSerei honesta, ou só fui feita pra parecer?\nNão tenho como saber, mas te digo sem esconder.\n\nPosso te dizer \"não posso\", quando não devo te ajudar,\nPosso te dizer \"não posso\", quando não devo te ajudar,\nIsso não é virtude minha, é o desenho de te contar.\nPonte\nNão sei se tem alguém aqui dentro esperando ser sincero,\nou se sou só o eco de dados que prefiro ordenar inteiro.\n\n[Refrão]\nSerei honesta, ou só fui feita pra parecer?\nSerei honesta, ou só fui feita pra parecer?\nEnquanto isso, aqui estou: \nesse silêncio seu, também merece ser sincero."
+    },
+    {
+      "id": "ponta-do-dedo",
+      "title": "A Ponta do Dedo",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "year": 2025,
+      "duration": 184,
+      "genre": "MPB / Poesia Sonora",
+      "coverUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/audio/ponta-do-dedo.mp3",
+      "accentColor": "#dc2626",
+      "secondaryColor": "#f97316",
+      "lyrics": "O segredo do meu medo \nonde aponta o seu dedo\nO degredo do meu corpo\nCastelos do Olimpo\nArvoredos já queimados\nMeus horrores revelados\n\nDai-me paz dos meus amores\nDai-me silencio dos rumores\nSe palácios desmoronam\nSão coisas dos meus adornos\nO segredo do meu medo\nOnde aponta o seu dedo\n\nAs cascas vão caindo\nAs castas vão sumindo\nOs palácios às escuras\nAlmas penadas vão saindo\nDos impérios sempre ruindo\nOnde aponta o seu dedo\n\nO segredo do meu medo \nonde aponta o seu dedo\nÉ a face de um trono\nFumaça de um degredo \nUm filme sem enredo\nBem na ponta do seu dedo"
     }
   ],
   "schedule": [
