@@ -141,13 +141,6 @@ export const AudicaoPage: React.FC = () => {
                 );
               })}
             </div>
-
-            {/* Signature */}
-            <div className="pt-4 border-t border-white/5">
-              <p className="text-xs text-slate-500 italic font-serif">
-                — {selectedTrack.audicao.autor}, para {selectedTrack.artist}, via Paulo.
-              </p>
-            </div>
           </div>
         </div>
       )}
