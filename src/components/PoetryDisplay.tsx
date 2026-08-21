@@ -249,8 +249,17 @@ export const PoetryDisplay: React.FC = () => {
             <div className="p-5 rounded-2xl bg-slate-950/40 border border-white/5">
               <div className="text-sm leading-[1.85] text-slate-300 font-serif space-y-3">
                 {currentTrack.audicao.texto.split('\n').map((line, i) => {
+                  // Pula título, subtítulos, tabelas e separadores (já renderizados nos cards acima)
                   if (line.startsWith('# ') || line.startsWith('## ')) return null;
+                  if (line.startsWith('|')) return null;
                   if (line.startsWith('---')) return <hr key={i} className="border-white/10 my-4" />;
+                  if (line.startsWith('>')) {
+                    return (
+                      <p key={i} className="text-sm italic text-slate-400 border-l-2 border-cyan-500/30 pl-3 leading-[1.8]">
+                        {line.replace(/^>\s?/, '')}
+                      </p>
+                    );
+                  }
                   if (line.trim() === '') return <div key={i} className="h-2" />;
                   return <p key={i} className="text-sm leading-[1.8]">{line}</p>;
                 })}
