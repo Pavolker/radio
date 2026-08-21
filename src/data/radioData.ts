@@ -65,6 +65,7 @@ export const INITIAL_TRACKS: Track[] = rawTracks.map((t: any, index: number) => 
   year: t.year,
   lyrics: t.lyrics,
   artistBio: t.artistBio,
+  audicao: t.audicao,
   accentColor: t.accentColor || '#6366f1',
   secondaryColor: t.secondaryColor || '#ec4899'
 }));
