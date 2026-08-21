@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { MainPlayerCard } from './components/MainPlayerCard';
 import { UpcomingSchedule } from './components/UpcomingSchedule';
@@ -10,112 +11,19 @@ import { EqualizerModal } from './components/EqualizerModal';
 import { CinemaMode } from './components/CinemaMode';
 import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { TrackList } from './components/TrackList';
+import { PlayerBar } from './components/PlayerBar';
+import { AudicaoPage } from './components/AudicaoPage';
 import { useRadioStore } from './lib/store';
-import { Radio, Heart, Globe, ShieldCheck, Sparkles, Volume2, Play, X } from 'lucide-react';
+import { Radio, Heart, Globe, ShieldCheck, Sparkles, Play, X, Headphones } from 'lucide-react';
 
-export default function App() {
-  const {
-    togglePlay,
-    toggleMute,
-    toggleCinemaMode,
-    toggleFavorite,
-    nextTrack,
-    previousTrack,
-    playTrack,
-    currentTrackIndex,
-    tracks,
-    theme,
-    stationInfo,
-    setEqualizerModalOpen,
-    setShortcutsModalOpen,
-    isEqualizerModalOpen,
-    isShortcutsModalOpen,
-    isCinemaMode
-  } = useRadioStore();
-
-  const currentTrack = tracks[currentTrackIndex];
-
-  // Detecta se veio de um link compartilhado
+function HomePage() {
+  const { tracks, currentTrackIndex, togglePlay, theme } = useRadioStore();
+  const currentTrack = tracks[currentTrackIndex] || tracks[0];
   const [sharedTrackId, setSharedTrackId] = useState<string | null>(null);
   const [dismissedBanner, setDismissedBanner] = useState(false);
 
-  // Auto-play da música compartilhada via link (?track=track-XXX)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const trackId = params.get('track');
-    if (trackId) {
-      setSharedTrackId(trackId);
-      // Aguardar um tick para o store inicializar
-      const timeout = setTimeout(() => {
-        const { tracks } = useRadioStore.getState();
-        const index = tracks.findIndex((t) => t.id === trackId);
-        if (index !== -1) {
-          playTrack(index);
-          // Limpar a URL para não ficar com ?track= na barra
-          window.history.replaceState({}, '', window.location.pathname);
-        }
-      }, 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [tracks, playTrack]);
-
-  // Global Keyboard Shortcuts Listener
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore if user is typing in an input or textarea
-      if (
-        document.activeElement?.tagName === 'INPUT' ||
-        document.activeElement?.tagName === 'TEXTAREA'
-      ) {
-        return;
-      }
-
-      if (e.code === 'Space') {
-        e.preventDefault();
-        togglePlay();
-      } else if (e.key === 'm' || e.key === 'M') {
-        toggleMute();
-      } else if (e.key === 'f' || e.key === 'F') {
-        toggleCinemaMode();
-      } else if (e.key === 'l' || e.key === 'L') {
-        if (currentTrack) toggleFavorite(currentTrack.id);
-      } else if (e.key === 'ArrowRight') {
-        nextTrack();
-      } else if (e.key === 'ArrowLeft') {
-        previousTrack();
-      } else if (e.key === 'Escape') {
-        if (isEqualizerModalOpen) setEqualizerModalOpen(false);
-        if (isShortcutsModalOpen) setShortcutsModalOpen(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [
-    togglePlay,
-    toggleMute,
-    toggleCinemaMode,
-    toggleFavorite,
-    nextTrack,
-    previousTrack,
-    currentTrack,
-    isEqualizerModalOpen,
-    isShortcutsModalOpen,
-    setEqualizerModalOpen,
-    setShortcutsModalOpen
-  ]);
-
   return (
-    <div className={`min-h-screen relative font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors duration-500 ${
-      theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-100 text-slate-900'
-    }`}>
-      
-      {/* Animated Ambient Background */}
-      <DynamicBackground />
-
-      {/* Top Navbar */}
-      <Navbar />
-
+    <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Banner de música compartilhada */}
       {sharedTrackId && !dismissedBanner && currentTrack && (
         <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
@@ -140,7 +48,6 @@ export default function App() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={togglePlay}
@@ -160,101 +67,189 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Content Area */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      {/* Centerpiece Hero Player */}
+      <section id="player-hero">
+        <MainPlayerCard />
+      </section>
 
-        {/* Centerpiece Hero Player */}
-        <section id="player-hero">
-          <MainPlayerCard />
-        </section>
+      {/* Poem & Biography */}
+      <section id="poetry-section">
+        <PoetryDisplay />
+      </section>
 
-        {/* Poem & Biography — Primeira Classe */}
-        <section id="poetry-section">
-          <PoetryDisplay />
-        </section>
+      {/* Track List */}
+      <section id="track-list-section">
+        <TrackList />
+      </section>
 
-        {/* Spotify-style Track List */}
-        <section id="track-list-section">
-          <TrackList />
-        </section>
+      {/* Live Program Schedule */}
+      <section id="schedule-section">
+        <UpcomingSchedule />
+      </section>
 
-        {/* Live Program Schedule & Upcoming Tracks */}
-        <section id="schedule-section">
-          <UpcomingSchedule />
-        </section>
+      {/* Two-Column Grid: History & Chat */}
+      <section id="community-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-6">
+          <RecentHistory />
+        </div>
+        <div className="lg:col-span-6">
+          <LiveCommunityChat />
+        </div>
+      </section>
+    </main>
+  );
+}
 
-        {/* Two-Column Grid: Recently Played History & Community Live Chat */}
-        <section id="community-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-6">
-            <RecentHistory />
-          </div>
-          <div className="lg:col-span-6">
-            <LiveCommunityChat />
-          </div>
-        </section>
-
-      </main>
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 bg-slate-950/90 backdrop-blur-xl text-slate-400 py-10 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-500 text-slate-950 font-bold">
-              <Radio className="w-5 h-5" />
+function BlogPage() {
+  return (
+    <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full max-w-4xl mx-auto py-16 px-6 text-center">
+        <div className="p-6 rounded-3xl backdrop-blur-2xl bg-slate-900/80 border border-white/10">
+          <div className="flex flex-col items-center gap-6 py-20">
+            <div className="p-4 rounded-2xl bg-amber-950/50 border border-amber-500/20">
+              <Headphones className="w-12 h-12 text-amber-400" />
             </div>
-            <div>
-              <div className="font-extrabold text-sm text-white tracking-wider">
-                {stationInfo.name} ({stationInfo.frequency})
+            <h2 className="text-2xl font-bold text-white">Em Breve</h2>
+            <p className="text-slate-400 max-w-md leading-relaxed">
+              O acervo de 200 análises musicais, 19 capítulos do livro "Filosofia da Música"
+              e textos autorais de Paulo Volker serão publicados aqui em breve.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function App() {
+  const {
+    togglePlay,
+    toggleMute,
+    toggleCinemaMode,
+    toggleFavorite,
+    nextTrack,
+    previousTrack,
+    playTrack,
+    currentTrackIndex,
+    tracks,
+    theme,
+    stationInfo,
+    setEqualizerModalOpen,
+    setShortcutsModalOpen,
+    isEqualizerModalOpen,
+    isShortcutsModalOpen,
+    isCinemaMode
+  } = useRadioStore();
+
+  const currentTrack = tracks[currentTrackIndex];
+
+  // Auto-play da música compartilhada via link (?track=track-XXX)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const trackId = params.get('track');
+    if (trackId) {
+      const timeout = setTimeout(() => {
+        const { tracks: storeTracks } = useRadioStore.getState();
+        const index = storeTracks.findIndex((t: { id: string }) => t.id === trackId);
+        if (index !== -1) {
+          playTrack(index);
+          window.history.replaceState({}, '', window.location.pathname);
+        }
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [tracks, playTrack]);
+
+  // Global Keyboard Shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+      else if (e.key === 'm' || e.key === 'M') toggleMute();
+      else if (e.key === 'f' || e.key === 'F') toggleCinemaMode();
+      else if (e.key === 'l' || e.key === 'L') { if (currentTrack) toggleFavorite(currentTrack.id); }
+      else if (e.key === 'ArrowRight') nextTrack();
+      else if (e.key === 'ArrowLeft') previousTrack();
+      else if (e.key === 'Escape') {
+        if (isEqualizerModalOpen) setEqualizerModalOpen(false);
+        if (isShortcutsModalOpen) setShortcutsModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [togglePlay, toggleMute, toggleCinemaMode, toggleFavorite, nextTrack, previousTrack, currentTrack, isEqualizerModalOpen, isShortcutsModalOpen, setEqualizerModalOpen, setShortcutsModalOpen]);
+
+  return (
+    <BrowserRouter>
+      <div className={`min-h-screen relative font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors duration-500 ${
+        theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-100 text-slate-900'
+      }`}>
+        
+        {/* Animated Ambient Background */}
+        <DynamicBackground />
+
+        {/* Top Navbar */}
+        <Navbar />
+
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/audicao" element={<AudicaoPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+        </Routes>
+
+        {/* Footer */}
+        <footer className="relative z-10 border-t border-white/10 bg-slate-950/90 backdrop-blur-xl text-slate-400 py-10 mt-12 pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-500 text-slate-950 font-bold">
+                <Radio className="w-5 h-5" />
               </div>
-              <p className="text-xs text-slate-500">
-                {stationInfo.tagline}
-              </p>
+              <div>
+                <div className="font-extrabold text-sm text-white tracking-wider">
+                  {stationInfo.name} ({stationInfo.frequency})
+                </div>
+                <p className="text-xs text-slate-500">{stationInfo.tagline}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-6 text-xs">
+              <button onClick={() => setShortcutsModalOpen(true)} className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                <Globe className="w-4 h-4" />
+                <span>Atalhos de Teclado</span>
+              </button>
+              <div className="flex items-center gap-1.5 text-emerald-400">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Acessível & Otimizado</span>
+              </div>
+            </div>
+            <div className="text-xs text-slate-500 font-mono text-center md:text-right">
+              © 2026 {stationInfo.name} • Transmissão Ininterrupta 24/7
+              <div className="mt-1 text-[10px] text-slate-600">
+                Copywriter MDH — Desenvolvido por Pvolker — Versão 1.0 — 2026
+              </div>
             </div>
           </div>
-
-          <div className="flex items-center gap-6 text-xs">
-            <button
-              onClick={() => setShortcutsModalOpen(true)}
-              className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
-            >
-              <Globe className="w-4 h-4" />
-              <span>Atalhos de Teclado</span>
-            </button>
-
-            <div className="flex items-center gap-1.5 text-emerald-400">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Acessível & Otimizado</span>
-            </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-white/5">
+            <p className="text-center text-xs leading-relaxed text-slate-500 max-w-3xl mx-auto">
+              Essa rádio é o resultado do trabalho de produção de poemas e letras de{' '}
+              <span className="text-slate-300 font-medium">Angélica Sátiro</span> e{' '}
+              <span className="text-slate-300 font-medium">Paulo Volker</span>, mais o trabalho de{' '}
+              <span className="text-cyan-400 font-semibold">Micélio</span>, uma IA especializada em
+              produção, composição e edição musical, baseada na plataforma{' '}
+              <span className="text-slate-300 font-medium">Suno</span>.
+            </p>
           </div>
+        </footer>
 
-          <div className="text-xs text-slate-500 font-mono text-center md:text-right">
-            © 2026 {stationInfo.name} • Transmissão Ininterrupta 24/7
-            <div className="mt-1 text-[10px] text-slate-600">
-              Copywriter MDH — Desenvolvido por Pvolker — Versão 1.0 — 2026
-            </div>
-          </div>
+        {/* Fixed Bottom Player Bar */}
+        <PlayerBar />
 
-        </div>
+        {/* Modals */}
+        <EqualizerModal />
+        <KeyboardShortcutsModal />
+        <CinemaMode />
 
-        {/* Credit Line */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-white/5">
-          <p className="text-center text-xs leading-relaxed text-slate-500 max-w-3xl mx-auto">
-            Essa rádio é o resultado do trabalho de produção de poemas e letras de{' '}
-            <span className="text-slate-300 font-medium">Angélica Sátiro</span> e{' '}
-            <span className="text-slate-300 font-medium">Paulo Volker</span>, mais o trabalho de{' '}
-            <span className="text-cyan-400 font-semibold">Micélio</span>, uma IA especializada em
-            produção, composição e edição musical, baseada na plataforma{' '}
-            <span className="text-slate-300 font-medium">Suno</span>.
-          </p>
-        </div>
-      </footer>
-
-      {/* Modals & Fullscreen Overlays */}
-      <EqualizerModal />
-      <KeyboardShortcutsModal />
-      <CinemaMode />
-
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }

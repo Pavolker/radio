@@ -42,7 +42,9 @@ export const MainPlayerCard: React.FC = () => {
     setLyricsOpen,
     isShuffled,
     toggleShuffle,
-    stationInfo
+    stationInfo,
+    setCurrentTime: setStoreCurrentTime,
+    setDuration: setStoreDuration
   } = useRadioStore();
 
   // Dual audio elements: current (playing) + next (preloading)
@@ -135,6 +137,8 @@ export const MainPlayerCard: React.FC = () => {
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
       setDuration(audio.duration || currentTrack?.duration || 180);
+      setStoreCurrentTime(audio.currentTime);
+      setStoreDuration(audio.duration || currentTrack?.duration || 180);
     };
 
     const handleEnded = () => {

@@ -4,6 +4,26 @@ export type AudioVisualizerMode = 'spectrum' | 'waveform' | 'aurora' | 'vumeter'
 
 export type EqualizerPreset = 'flat' | 'bass_boost' | 'synthwave' | 'vocal' | 'chillout' | 'club' | 'custom';
 
+export interface AudicaoTecnica {
+  duracao: number;
+  bpm: number;
+  bpmSuperficie?: number;
+  tonalidade: string;
+  dinamicaDb: number;
+  brilhoInicialHz?: number;
+  brilhoPicoHz?: number;
+  brilhoFinalHz?: number;
+  percentualHarmonia: number;
+  percentualPercussao: number;
+}
+
+export interface Audicao {
+  autor: string;
+  data: string;
+  tecnica: AudicaoTecnica;
+  texto: string;
+}
+
 export interface Track {
   id: string;
   title: string;
@@ -12,12 +32,13 @@ export interface Track {
   coverUrl: string;
   audioUrl: string;
   genre: string;
-  duration: number; // in seconds
+  duration: number;
   year?: number;
   lyrics?: string;
   artistBio?: string;
-  accentColor?: string; // hex or rgb for dynamic visual background
+  accentColor?: string;
   secondaryColor?: string;
+  audicao?: Audicao;
 }
 
 export interface RadioStationInfo {
@@ -40,7 +61,7 @@ export interface ProgramSchedule {
   id: string;
   title: string;
   host: string;
-  timeSlot: string; // e.g. "00:00 - 04:00"
+  timeSlot: string;
   genre: string;
   coverImage: string;
   description: string;
@@ -53,7 +74,7 @@ export interface ListenerComment {
   userAvatar: string;
   text: string;
   timestamp: string;
-  reaction?: string; // e.g. '🔥' | '💜' | '⚡' | '🎧'
+  reaction?: string;
   isRequest?: boolean;
 }
 
@@ -72,7 +93,7 @@ export interface RadioCatalogJSON {
 }
 
 export interface AudioEqualizerBands {
-  b60: number;   // -12 to +12 dB
+  b60: number;
   b230: number;
   b910: number;
   b3k6: number;

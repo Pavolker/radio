@@ -40,6 +40,12 @@ interface RadioState {
   shuffleOrder: number[];
   shuffleIndex: number;
 
+  // Player time state (for PlayerBar)
+  currentTime: number;
+  duration: number;
+  setCurrentTime: (t: number) => void;
+  setDuration: (d: number) => void;
+
   // Modals state
   isGithubModalOpen: boolean;
   isEqualizerModalOpen: boolean;
@@ -198,6 +204,12 @@ export const useRadioStore = create<RadioState>((set, get) => {
     isEqualizerModalOpen: false,
     isShortcutsModalOpen: false,
     isLyricsOpen: false,
+
+    // Player time state
+    currentTime: 0,
+    duration: 0,
+    setCurrentTime: (t) => set({ currentTime: t }),
+    setDuration: (d) => set({ duration: d }),
 
     customGithubUrl: 'https://raw.githubusercontent.com/Pavolker/radio/main/public/radio-catalog.json',
     isFetchingGithub: false,

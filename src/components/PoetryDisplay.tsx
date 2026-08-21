@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useEffect } from 'react';
-import { BookOpen, User, Music, Sparkles, ChevronRight } from 'lucide-react';
+import { BookOpen, User, Music, Sparkles, ChevronRight, Headphones } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 
 interface Stanza {
@@ -74,7 +74,7 @@ const typeConfig: Record<Stanza['type'], { color: string; bg: string; label: str
 export const PoetryDisplay: React.FC = () => {
   const { tracks, currentTrackIndex, theme } = useRadioStore();
   const currentTrack = tracks[currentTrackIndex] || tracks[0];
-  const [activeTab, setActiveTab] = React.useState<'poetry' | 'bio'>('poetry');
+  const [activeTab, setActiveTab] = React.useState<'poetry' | 'bio' | 'audicao'>('poetry');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const stanzas = useMemo(() => parseStanzas(currentTrack?.lyrics || ''), [currentTrack?.lyrics]);
@@ -182,6 +182,19 @@ export const PoetryDisplay: React.FC = () => {
             <User className="w-3.5 h-3.5" />
             Biografia
           </button>
+          {currentTrack?.audicao && (
+            <button
+              onClick={() => setActiveTab('audicao')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase transition-all ${
+                activeTab === 'audicao'
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Headphones className="w-3.5 h-3.5" />
+              Audição
+            </button>
+          )}
         </div>
       </div>
 
@@ -202,6 +215,48 @@ export const PoetryDisplay: React.FC = () => {
               </div>
             )}
           </>
+        )}
+
+        {activeTab === 'audicao' && currentTrack?.audicao && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Headphones className="w-4 h-4 text-cyan-400" />
+              <span className="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold">
+                Escutado por {currentTrack.audicao.autor} — {currentTrack.audicao.data}
+              </span>
+            </div>
+
+            {/* Technical data grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+              <div className="p-3 rounded-xl bg-slate-950/60 border border-white/5">
+                <div className="text-[10px] text-slate-500 font-mono mb-0.5">Pulso</div>
+                <div className="text-xs font-semibold text-white">{currentTrack.audicao.tecnica.bpm} BPM</div>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-950/60 border border-white/5">
+                <div className="text-[10px] text-slate-500 font-mono mb-0.5">Tonalidade</div>
+                <div className="text-xs font-semibold text-white">{currentTrack.audicao.tecnica.tonalidade}</div>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-950/60 border border-white/5">
+                <div className="text-[10px] text-slate-500 font-mono mb-0.5">Dinâmica</div>
+                <div className="text-xs font-semibold text-white">{currentTrack.audicao.tecnica.dinamicaDb} dB</div>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-950/60 border border-white/5">
+                <div className="text-[10px] text-slate-500 font-mono mb-0.5">Corpo</div>
+                <div className="text-xs font-semibold text-white">{currentTrack.audicao.tecnica.percentualHarmonia}% / {currentTrack.audicao.tecnica.percentualPercussao}%</div>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-950/40 border border-white/5">
+              <div className="text-sm leading-[1.85] text-slate-300 font-serif space-y-3">
+                {currentTrack.audicao.texto.split('\n').map((line, i) => {
+                  if (line.startsWith('# ') || line.startsWith('## ')) return null;
+                  if (line.startsWith('---')) return <hr key={i} className="border-white/10 my-4" />;
+                  if (line.trim() === '') return <div key={i} className="h-2" />;
+                  return <p key={i} className="text-sm leading-[1.8]">{line}</p>;
+                })}
+              </div>
+            </div>
+          </div>
         )}
 
         {activeTab === 'bio' && (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Radio,
   SlidersHorizontal,
@@ -11,7 +12,9 @@ import {
   BarChart3,
   Waves,
   Disc,
-  Volume2
+  Volume2,
+  Headphones,
+  BookOpen
 } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 import { AudioVisualizerMode } from '../types';
@@ -45,36 +48,60 @@ export const Navbar: React.FC = () => {
     setVisualizerMode(modes[nextIdx]);
   };
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-xl border-b border-white/10 bg-slate-950/80 text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
         
-        {/* Left: Radio Station Logo & Live Badge */}
+        {/* Left: Radio Station Logo & Navigation */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <div className="relative group flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-pink-500 p-0.5 shadow-lg shadow-cyan-500/20">
+          <Link to="/" className="relative group flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-pink-500 p-0.5 shadow-lg shadow-cyan-500/20">
             <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
               <Radio className="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
             </div>
-          </div>
+          </Link>
 
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="font-extrabold text-lg tracking-wider bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                {stationInfo.name}
-              </h1>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/30">
-                {stationInfo.frequency}
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 hidden sm:block truncate max-w-xs">
-              {stationInfo.tagline}
-            </p>
+          <div className="hidden sm:flex items-center gap-1">
+            <Link
+              to="/"
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                currentPath === '/' || currentPath === ''
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              <Radio className="w-3.5 h-3.5 inline-block mr-1.5" />
+              Rádio
+            </Link>
+            <Link
+              to="/audicao"
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                currentPath === '/audicao'
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              <Headphones className="w-3.5 h-3.5 inline-block mr-1.5" />
+              Audição
+            </Link>
+            <Link
+              to="/blog"
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                currentPath === '/blog'
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5 inline-block mr-1.5" />
+              Textos
+            </Link>
           </div>
         </div>
 
         {/* Center: Live Status & Listener Count Badge */}
         <div className="hidden md:flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs font-medium">
-          {/* Status Indicator */}
           <div className="flex items-center gap-2">
             <span className={`relative flex h-2.5 w-2.5 ${streamStatus === 'live' ? 'opacity-100' : 'opacity-70'}`}>
               {streamStatus === 'live' && (
@@ -102,16 +129,11 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="h-3 w-px bg-white/20" />
-
-          {/* Listener Count */}
           <div className="flex items-center gap-1.5 text-slate-300">
             <Users className="w-3.5 h-3.5 text-cyan-400" />
             <span className="font-mono">1.482 ouvintes</span>
           </div>
-
           <div className="h-3 w-px bg-white/20" />
-
-          {/* Bitrate Badge */}
           <span className="text-[10px] font-mono text-pink-400 bg-pink-950/60 px-2 py-0.5 rounded-md border border-pink-500/30">
             {currentBitrate} KBPS HQ
           </span>
@@ -119,7 +141,6 @@ export const Navbar: React.FC = () => {
 
         {/* Right: Quick Control Tools */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* Visualizer Mode Switcher */}
           <button
             onClick={cycleVisualizer}
             title={`Visualizador: ${visualizerMode.toUpperCase()} (Clique para alternar)`}
@@ -129,7 +150,6 @@ export const Navbar: React.FC = () => {
             <span className="hidden lg:inline capitalize">{visualizerMode}</span>
           </button>
 
-          {/* Equalizer Modal Toggle */}
           <button
             onClick={() => setEqualizerModalOpen(true)}
             title="Ajustar Equalizador Gráfico"
@@ -138,7 +158,6 @@ export const Navbar: React.FC = () => {
             <SlidersHorizontal className="w-4 h-4" />
           </button>
 
-          {/* Cinema / Studio Fullscreen Mode */}
           <button
             onClick={toggleCinemaMode}
             title="Modo Tela Cheia / Cinema Studio"
@@ -147,7 +166,6 @@ export const Navbar: React.FC = () => {
             <Maximize2 className="w-4 h-4" />
           </button>
 
-          {/* Shortcuts Guide */}
           <button
             onClick={() => setShortcutsModalOpen(true)}
             title="Atalhos de Teclado"
@@ -156,7 +174,6 @@ export const Navbar: React.FC = () => {
             <Keyboard className="w-4 h-4" />
           </button>
 
-          {/* Dark / Light Theme Toggle */}
           <button
             onClick={toggleTheme}
             title="Alternar Tema Escuro / Claro"
@@ -166,6 +183,43 @@ export const Navbar: React.FC = () => {
           </button>
         </div>
 
+      </div>
+
+      {/* Mobile nav */}
+      <div className="sm:hidden flex items-center justify-center gap-1 pb-2 px-4">
+        <Link
+          to="/"
+          className={`flex-1 text-center px-2 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            currentPath === '/' || currentPath === ''
+              ? 'bg-cyan-500/20 text-cyan-300'
+              : 'text-slate-500'
+          }`}
+        >
+          <Radio className="w-3.5 h-3.5 inline-block mr-1" />
+          Rádio
+        </Link>
+        <Link
+          to="/audicao"
+          className={`flex-1 text-center px-2 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            currentPath === '/audicao'
+              ? 'bg-cyan-500/20 text-cyan-300'
+              : 'text-slate-500'
+          }`}
+        >
+          <Headphones className="w-3.5 h-3.5 inline-block mr-1" />
+          Audição
+        </Link>
+        <Link
+          to="/blog"
+          className={`flex-1 text-center px-2 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            currentPath === '/blog'
+              ? 'bg-cyan-500/20 text-cyan-300'
+              : 'text-slate-500'
+          }`}
+        >
+          <BookOpen className="w-3.5 h-3.5 inline-block mr-1" />
+          Textos
+        </Link>
       </div>
     </header>
   );
