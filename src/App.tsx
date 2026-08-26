@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { MainPlayerCard } from './components/MainPlayerCard';
-import { UpcomingSchedule } from './components/UpcomingSchedule';
+
 import { PoetryDisplay } from './components/PoetryDisplay';
 import { RecentHistory } from './components/RecentHistory';
 
@@ -82,10 +82,7 @@ function HomePage() {
         <TrackList />
       </section>
 
-      {/* Live Program Schedule */}
-      <section id="schedule-section">
-        <UpcomingSchedule />
-      </section>
+
 
       {/* Two-Column Grid: History & Chat */}
       <section id="community-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8">
