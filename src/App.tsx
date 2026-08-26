@@ -5,7 +5,7 @@ import { MainPlayerCard } from './components/MainPlayerCard';
 import { UpcomingSchedule } from './components/UpcomingSchedule';
 import { PoetryDisplay } from './components/PoetryDisplay';
 import { RecentHistory } from './components/RecentHistory';
-import { LiveCommunityChat } from './components/LiveCommunityChat';
+
 import { DynamicBackground } from './components/DynamicBackground';
 import { EqualizerModal } from './components/EqualizerModal';
 import { CinemaMode } from './components/CinemaMode';
@@ -93,7 +93,7 @@ function HomePage() {
           <RecentHistory />
         </div>
         <div className="lg:col-span-6">
-          <LiveCommunityChat />
+
         </div>
       </section>
     </main>
