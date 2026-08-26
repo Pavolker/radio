@@ -230,9 +230,11 @@ export default function App() {
             <p className="text-center text-xs leading-relaxed text-slate-500 max-w-3xl mx-auto">
               Essa rádio é o resultado do trabalho de produção de poemas e letras de{' '}
               <span className="text-slate-300 font-medium">Angélica Sátiro</span> e{' '}
-              <span className="text-slate-300 font-medium">Paulo Volker</span>, mais o trabalho de{' '}
-              <span className="text-cyan-400 font-semibold">Micélio</span>, uma IA especializada em
-              produção, composição e edição musical, baseada na plataforma{' '}
+              <span className="text-slate-300 font-medium">Paulo Volker</span>. O harness de
+              desenvolvimento e gestão de IA é feito por{' '}
+              <span className="text-cyan-400 font-semibold">Hermes</span> e a engenharia de
+              estilos por <span className="text-cyan-400 font-semibold">Chopin</span>, com
+              edição musical baseada na plataforma{' '}
               <span className="text-slate-300 font-medium">Suno</span>.
             </p>
           </div>
