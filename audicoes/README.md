@@ -28,9 +28,13 @@ Cada análise combina dados objetivos extraídos via algoritmos (ffprobe + libro
 20. [Lance de Dados — Pvolker](20-lance-de-dados.md)
 21. [O Blues da Máquina Honesta — Angélica Sátiro](21-o-blues-da-maquina-honesta.md)
 22. [A Ponta do Dedo — Pvolker](22-a-ponta-do-dedo.md)
+23. [Beijo Cantado — Angélica Sátiro](23-beijo-cantado.md)
+24. [O Rezo dos Oas — Angélica Sátiro](24-o-rezo-dos-oas.md)
+25. [Puro Querer — Pvolker](25-puro-querer.md)
+26. [Sagrado — Pvolker](26-sagrado.md)
 
 ---
 
-**Total:** 22 análises
+**Total:** 26 análises
 **Data:** agosto de 2026
 **Método:** ffprobe + librosa → dados técnicos → interpretação poética

@@ -17,7 +17,7 @@
     "githubJsonPath": "main/public/radio-catalog.json",
     "bitrateKbps": 320,
     "format": "HQ MP3 Stream",
-    "totalDuration": 4057
+    "totalDuration": 4698.8
   },
   "tracks": [
     {
@@ -695,6 +695,126 @@
           "percentualPercussao": 22
         },
         "texto": "# UMA AUDIÇÃO — \"A Ponta do Dedo\", de Pvolker\n\n> Análise de Chopin, o engenheiro de estilos da equipe MDH. Chopin usa algoritmos de análise sonora: ffprobe e librosa extraem o pulso (BPM), a tonalidade, a faixa dinâmica, o brilho espectral e o equilíbrio entre harmonia e percussão de cada gravação. Chopin escuta e traduz números em sentido.\n\n---\n\n## O que a medição revelou\n\n| Dimensão | O que a máquina mediu |\n|----------|----------------------|\n| Duração | 3:04 |\n| Pulso | 72 no coração, 144 na superfície |\n| Tonalidade | Menor, mística, modal — Dm com inflexões frígias |\n| Faixa dinâmica | 52 dB — contida, íntima |\n| Brilho da voz | Nasce opaca a 1612 Hz, ascende a 2745 Hz no ápice, e apaga-se em brasa a 1830 Hz |\n| Corpo | 78% harmonia, 22% percussão — a palavra carrega o peso, a percussão é apenas o chão |\n\n---\n\n## A história que esses números contam\n\n**O coração a 72, o corpo a 144 — o desdobramento.**\n\nA música pulsa em dois andares sobrepostos: por dentro, um coração a 72 batidas por minuto — o pulso de quem caminha em câmara lenta pelos próprios escombros; por fora, um corpo a 144 que se desdobra sobre si mesmo, como o eco de um palácio que cai e reverbera antes de virar silêncio. É a métrica do poema que se repete em espiral: *\"O segredo do meu medo / onde aponta o seu dedo\"* — a cada volta, o mesmo verso, mas a cada volta o abismo é mais fundo.\n\nNão é uma canção que avança. É uma canção que escava.\n\n**A contenção de quem não grita — canta em segredo.**\n\nCinquenta e dois decibéis. Não é o grito do blues, não é a explosão do gospel. É a faixa dinâmica de quem fala com alguém que está a meio metro de distância — ou de quem fala consigo mesmo. Enquanto \"A Vida\" de Pvolker se abre em 97 dB do silêncio ao êxtase, \"A Ponta do Dedo\" recusa essa viagem para fora. Toda a viagem aqui é para dentro. A música não explode — ela se revela. E revelar é mais difícil do que explodir, porque exige que se desnude sem o disfarce do volume.\n\n**O brilho da voz: um arco de revelação.**\n\nA voz nasce opaca em 1612 Hz — a cor do cobre sem polimento, de quem começa a cantar com o segredo ainda trancado. Sobe lentamente, ganha calor, até alcançar 2745 Hz no ápice — o momento em que o segredo é dito, o medo é nomeado, o dedo aponta. E então, no movimento final, desce para 1830 Hz, uma brasa ainda quente mas que não queima mais. É a voz de quem já disse tudo e agora só precisa que o silêncio complete a frase.\n\n**Setenta e oito por cento de harmonia.**\n\nA música é quase toda corpo harmônico — violão, cordas, talvez um piano que sustenta as modulações frígias. A percussão, com apenas 22%, não marca o tempo: ela *sugere* o tempo. É o chão que se move sob os pés de quem caminha sobre ruínas. O som não é empurrado pela batida; ele é carregado pela harmonia. E a harmonia de Dm com inflexões frígias — aquela segunda menor que dói — é a cor exata de um palácio que se desmorona: belo mesmo na queda.\n\n---\n\n## As camadas da letra\n\n> *O segredo do meu medo / onde aponta o seu dedo*\n\nA canção se abre com uma acusação que é também uma confissão. O dedo que aponta é o do outro — o julgamento, o olhar que denuncia. Mas o segredo está em quem canta. O medo não está no dedo; o medo está no que o dedo revela.\n\n> *O degredo do meu corpo / Castelos do Olimpo / Arvoredos já queimados / Meus horrores revelados*\n\nCada verso é uma camada que se desprende. O corpo como degredo — prisão e exílio ao mesmo tempo. Os castelos do Olimpo são as ilusões de grandeza que o eu lírico construiu para si. Os arvoredos queimados são as promessas que não vingaram. E os horrores revelados — o que o dedo aponta não é o segredo, é o horror de ser visto por inteiro.\n\n> *Dai-me paz dos meus amores / Dai-me silêncio dos rumores*\n\nA única prece da canção. Não é uma súplica de salvação — é uma súplica de silêncio. O que o eu lírico pede não é que o amor volte ou que a dor passe; é que o ruído pare. Porque o rumor é pior que o julgamento: o rumor é o julgamento que não se diz em voz alta, que fica ecoando nos corredores do palácio em ruínas.\n\n> *As cascas vão caindo / As castas vão sumindo / Os palácios às escuras / Almas penadas vão saindo / Dos impérios sempre ruindo*\n\nA segunda estrofe é um inventário da dissolução. Cascas, castas, palácios, impérios — tudo o que era estrutura, hierarquia, fachada, está caindo. E o que sobra? Almas penadas, fantasmas que vagam pelos escombros. O eu lírico não se salva da queda — ele se torna parte da paisagem em ruínas.\n\n> *O segredo do meu medo / onde aponta o seu dedo / É a face de um trono / Fumaça de um degredo / Um filme sem enredo / Bem na ponta do seu dedo*\n\nA última estrofe é a revelação final. O segredo do medo é a face de um trono — o poder que o eu lírico um dia acreditou ter, ou que o outro acreditou ter sobre ele. Mas o trono é fumaça. O degredo é fumaça. O filme não tem enredo. Tudo o que parecia sólido, hierárquico, significativo, se desfaz quando o dedo aponta. E o que fica? Apenas a ponta do dedo — o ponto de contato mínimo entre o julgamento e o revelado.\n\n---\n\n## O que a máquina não pode medir\n\nA máquina mede brilho, duração, pulsação. Mas não mede o que acontece no silêncio entre o fim de um verso e o começo de outro. Não mede o arrepio que vem quando o eu lírico canta *\"bem na ponta do seu dedo\"* e a música se fecha sobre si mesma como uma porta que se tranca por dentro.\n\n\"A Ponta do Dedo\" não é uma música sobre o medo de ser julgado. É uma música sobre o medo de ser visto — e sobre o alívio que vem quando, finalmente, se é. Mesmo que o que se veja sejam ruínas. Mesmo que o que se veja seja fumaça.\n\nO dedo aponta. O palácio cai. E no silêncio que sobra, o que resta é uma voz que canta, sem pressa de terminar, o único segredo que realmente importa: que não há segredo algum. Apenas a ponta do dedo. Apenas o instante em que o medo é nomeado e, por isso mesmo, deixa de ser medo.\n\n---\n\n*A música não precisa de defesa quando a verdade dos números dança com a verdade da poesia.*"
+      }
+    },
+    {
+      "id": "beijo-cantado",
+      "title": "Beijo Cantado",
+      "artist": "Angélica Sátiro",
+      "album": "Angélica Sátiro",
+      "duration": 117.5,
+      "year": 2026,
+      "coverUrl": "https://images.unsplash.com/photo-1518609878373-062129df164f?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/beijo-cantado.mp3",
+      "accentColor": "#ec4899",
+      "secondaryColor": "#f472b6",
+      "lyrics": "O amor que é \nmais espinho\nE menos flor\nÉ a dor de amor\nQue não é amor\nSão outros nomes\ne outros sem nomes\nTodos disfarçados \nTodos escondidos\nNos intervalos entre o A e o R\n\nO amor que é\nSimplesmente é\ne se manifesta\nNaquilo que liga \nque conecta \nque desinfeta \nnossos tantos esconderijos\ndentro das palavras sequestradas\n\nO que queima \nTem muitos nomes\nO amorcombustão \né antiinflamatório \nO paradoxo do amar\né ser luto abençoado \n\nO amor que é\nSimplesmente é\ne se manifesta\nNaquilo que liga \nque conecta \nque desinfeta",
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território.",
+      "audicao": {
+        "autor": "Chopin",
+        "data": "2026-08-24",
+        "tecnica": {
+          "bpm": 130.8,
+          "tonalidade": "D",
+          "faixa_dinamica_db": 80.0,
+          "brilho_inicial_hz": 1856.0,
+          "brilho_pico_hz": 10185.0,
+          "brilho_final_hz": 1987.0,
+          "percentual_harmonia": 92.0,
+          "percentual_percussao": 8.0,
+          "duracao": 117.5
+        },
+        "texto": "# UMA AUDIÇÃO — \"Beijo Cantado\", de Angélica Sátiro\n\n> Análise de Chopin, o engenheiro de estilos da equipe MDH. Chopin usa algoritmos de análise sonora: ffprobe e librosa extraem o pulso (BPM), a tonalidade, a faixa dinâmica, o brilho espectral e o equilíbrio entre harmonia e percussão de cada gravação. Chopin escuta e traduz números em sentido.\n\n---\n\n## O que a medição revelou\n\n| Dimensão | O que a máquina mediu |\n|----------|----------------------|\n| Duração | 1:58 |\n| Pulso | 130.8 BPM — vivo, quase urgente, como quem precisa dizer |\n| Tonalidade | Ré maior — clara, aberta, solar |\n| Faixa dinâmica | 80.0 dB — ampla, do sussurro ao grito contido |\n| Brilho da voz | começa em 1856 Hz, explode a 10185 Hz no pico, retorna a 1987 Hz |\n| Corpo | 92% harmonia, 8% percussão — a palavra carrega tudo |\n\n---\n\n## A história que esses números contam\n\n**O pulso que não espera.**\n\n130.8 BPM é um andamento vivo, quase urgente. Não é pressa — é a necessidade de dizer. O poema de Angélica fala de amor, espinhos, flores e nomes disfarçados, e a música acompanha esse ritmo de pensamento que não pode esperar: precisa ser dito agora, antes que o intervalo entre o A e o R se feche. O andamento é o de quem caminha rápido porque tem algo importante para contar.\n\n**A harmonia que sustenta o paradoxo.**\n\n92% de harmonia. Quase tudo é melodia, acordes, sustentação harmônica. A percussão é mínima — 8% — apenas o suficiente para marcar o tempo, não para conduzir. É uma música que se apoia na palavra, não no ritmo. O paradoxo do amor (espinho/flor, combustão/anti-inflamatório) é sustentado pela harmonia que não julga, não separa, apenas contém.\n\n**O brilho que explode e retorna.**\n\nA voz começa em 1856 Hz, sobe até 10185 Hz — um salto de mais de 8000 Hz — e retorna a 1987 Hz, quase o ponto de partida. É o arco de quem diz algo intenso, explode em significado, e depois volta ao silêncio contemplativo. O pico de brilho (10185 Hz) é o momento em que \"o amorcombustão é antiinflamatório\" — a contradição se torna som, a dissonância se torna frequência. O retorno a 1987 Hz é a aceitação: o paradoxo não se resolve, apenas se habita.\n\n**A tonalidade solar para um poema noturno.**\n\nRé maior é uma tonalidade clara, aberta. Mas o poema fala de espinhos, nomes escondidos, luto abençoado. A escolha de uma tonalidade solar para um texto sobre a dor do amor não é contradição — é a afirmação de que o amor que é \"simplesmente é\" não precisa de escuridão para ser profundo. A luz não nega a sombra; a luz a contém.\n\n**80 dB de dinâmica: do sussurro ao grito.**\n\nA faixa dinâmica de 80 dB é ampla. A música pode ir do quase-silêncio (\"o amor que é mais espinho\") ao grito contido (\"o paradoxo do amar é ser luto abençoado\"). É a dinâmica de quem não tem medo de variar, de quem sabe que o amor não é constante — é pico e vale, explosão e retorno, combustão e brasa."
+      }
+    },
+    {
+      "id": "o-rezo-dos-oas",
+      "title": "O Rezo dos Oas",
+      "artist": "Angélica Sátiro",
+      "album": "Angélica Sátiro",
+      "duration": 177.5,
+      "year": 2026,
+      "coverUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/o-rezo-dos-oas.mp3",
+      "accentColor": "#8b5cf6",
+      "secondaryColor": "#a78bfa",
+      "lyrics": "Você, pessoa do bem \nSe cair, se levanta e… \ncom elegância!\n\nDurante o sacrifício dos as\nPega na minha mão, que é real\nE me acompanha neste rezo,\nnesta reza dos oas…\n\nQue todos os iluminados e todas as luminosas te acompanhem. As oas brilham com sua luz\n\nQue oas que são da frente, abram seus caminhos.\n\nQue oas que estão detrás guardem suas costas.\n\nQue oas que estão abaixo, nutram suas raizes.\n\nQue oas que estão em cima protejam seu canal de luz.\n\nQue oas que são do norte, do sul, do leste e do oeste guardem todos os seus lados.\n\nQue as forças do bem te acompanhem nesta jornada.\n\n\nDurante o sacrifício dos as, \nPega na minha mão que é real\nE me acompanha neste rezo das OAS\n\nQue assim sejo\nQue assim seja",
+      "artistBio": "Filósofa e poeta brasileira. Escreve as letras que dão origem às músicas do universo SINAPSES DOS VENTOS. Parceira criativa de Paulo Volker. Sua escrita carrega a tensão entre a fragilidade do cansado contemporâneo e a ferocidade da mulher que reescreve seus próprios mitos — de Filomela a Medusa, de Lilith à Malinche. Escreve em português, catalão e espanhol, tecendo colagens linguísticas que destroem fronteiras entre corpo, língua e território.",
+      "audicao": {
+        "autor": "Chopin",
+        "data": "2026-08-24",
+        "tecnica": {
+          "bpm": 95.3,
+          "tonalidade": "E",
+          "faixa_dinamica_db": 55.2,
+          "brilho_inicial_hz": 2165.0,
+          "brilho_pico_hz": 8125.0,
+          "brilho_final_hz": 2465.0,
+          "percentual_harmonia": 81.0,
+          "percentual_percussao": 19.0,
+          "duracao": 177.5
+        },
+        "texto": "# UMA AUDIÇÃO — \"O Rezo dos Oas\", de Angélica Sátiro\n\n> Análise de Chopin, o engenheiro de estilos da equipe MDH. Chopin usa algoritmos de análise sonora: ffprobe e librosa extraem o pulso (BPM), a tonalidade, a faixa dinâmica, o brilho espectral e o equilíbrio entre harmonia e percussão de cada gravação. Chopin escuta e traduz números em sentido.\n\n---\n\n## O que a medição revelou\n\n| Dimensão | O que a máquina mediu |\n|----------|----------------------|\n| Duração | 2:58 |\n| Pulso | 95.3 BPM — contemplativo, ritual, como uma reza |\n| Tonalidade | Mi maior — aberta, espiritual, luminosa |\n| Faixa dinâmica | 55.2 dB — contida, íntima, como uma prece |\n| Brilho da voz | começa em 2165 Hz, sobe a 8125 Hz, retorna a 2465 Hz |\n| Corpo | 81% harmonia, 19% percussão — a palavra conduz, o ritmo sustenta |\n\n---\n\n## A história que esses números contam\n\n**O pulso da reza.**\n\n95.3 BPM é um andamento contemplativo, nem lento demais para perder o fio, nem rápido demais para perder a solenidade. É o pulso de quem reza, de quem invoca, de quem chama os \"oas\" (sejam eles o que forem — ancestrais, orixás, forças, presenças). A música não corre; ela caminha com propósito, como uma procissão que sabe aonde vai.\n\n**A tonalidade luminosa para um texto de proteção.**\n\nMi maior é uma tonalidade aberta, luminosa, espiritual. É a escolha perfeita para um poema que invoca proteção: \"Que oas que são da frente, abram seus caminhos. Que oas que estão detrás guardem suas costas.\" A tonalidade não é sombria — é a luz que protege, não a escuridão que ameaça. É a tonalidade de quem confia.\n\n**55.2 dB de dinâmica: a intimidade da prece.**\n\nA faixa dinâmica de 55.2 dB é contida. Não há gritos, não há explosões. É a dinâmica de uma reza íntima, de uma invocação pessoal, de um \"pega na minha mão que é real\". A música não precisa de volume para ser poderosa — precisa de presença. E a presença está lá, em cada palavra, em cada invocação, em cada \"que assim seja\".\n\n**O brilho que sobe e retorna: a espiral da reza.**\n\nA voz começa em 2165 Hz, sobe a 8125 Hz no pico, e retorna a 2465 Hz. É uma espiral, não um arco. A reza não é linear — é circular, como as invocações que se repetem, como os \"oas\" que vêm de todas as direções (norte, sul, leste, oeste). O brilho sobe quando a invocação se intensifica (\"Que todos os iluminados e todas as luminosas te acompanhem\") e retorna quando a reza se aquieta (\"Que assim seja\").\n\n**81% harmonia, 19% percussão: o equilíbrio do ritual.**\n\nA harmonia domina (81%), mas a percussão está presente (19%) — não para conduzir, mas para marcar o ritmo do ritual, como um tambor que acompanha uma procissão. É o equilíbrio perfeito entre a palavra (que invoca) e o ritmo (que sustenta). A música é um rezo, e todo rezo precisa de um pulso para não se perder no ar."
+      }
+    },
+    {
+      "id": "puro-querer",
+      "title": "Puro Querer",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "duration": 154.0,
+      "year": 2026,
+      "coverUrl": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/puro-querer.mp3",
+      "accentColor": "#f59e0b",
+      "secondaryColor": "#fbbf24",
+      "lyrics": "PURO QUERER\n\nE porque basta um beijo\nPois um beijo diz tudo\nQueria-me toda,\ntodo o meu amar.\n\nE porque basta a presença\nPois a presença tudo oferece\nQueria-me sempre,\nem todo lugar.\n\nE porque basta uma palavra\nPois a palavra revela\nQueria-me texto,\npuro falar.\n\nE porque basta o amor\nPois o amor tudo contém\nQueria-me deusa,\npuro idolatrar.\n\nE porque basta o querer\nPois o querer tudo retém\nQueria além,\nTudo abraçar\n\nE porque basta ser\nPois o todo o ser precisa morrer\nQueria-me eterno\nNunca acabar",
+      "artistBio": "Paulo Volker — escritor, filósofo e músico por trás do pseudônimo Pvolker. Criador do Paradigma Conceitual, um sistema de oito eixos (Crise, Pessoa, Consciência, Conhecimento, Vida, Morte, Realidade, Universo) que atravessa toda sua produção. Suas letras são poemas de fugida — do tempo, do espaço, da memória, do amor. Escreve sobre o aqui-agora como alucinação, sobre o vôo alto como coragem, sobre a curva do espaço como portal. Na poesia, encontra o único lugar onde o pensamento pode dançar sem explicar.",
+      "audicao": {
+        "autor": "Chopin",
+        "data": "2026-08-24",
+        "tecnica": {
+          "bpm": 114.8,
+          "tonalidade": "D#",
+          "faixa_dinamica_db": 80.0,
+          "brilho_inicial_hz": 1409.0,
+          "brilho_pico_hz": 7221.0,
+          "brilho_final_hz": 1075.0,
+          "percentual_harmonia": 98.3,
+          "percentual_percussao": 1.7,
+          "duracao": 154.0
+        },
+        "texto": "# UMA AUDIÇÃO — \"Puro Querer\", de Pvolker\n\n> Análise de Chopin, o engenheiro de estilos da equipe MDH. Chopin usa algoritmos de análise sonora: ffprobe e librosa extraem o pulso (BPM), a tonalidade, a faixa dinâmica, o brilho espectral e o equilíbrio entre harmonia e percussão de cada gravação. Chopin escuta e traduz números em sentido.\n\n---\n\n## O que a medição revelou\n\n| Dimensão | O que a máquina mediu |\n|----------|----------------------|\n| Duração | 2:34 |\n| Pulso | 114.8 BPM — moderado, como quem pensa enquanto diz |\n| Tonalidade | Ré# maior — luminosa, mas com arestas |\n| Faixa dinâmica | 80.0 dB — ampla, do sussurro ao grito contido |\n| Brilho da voz | começa em 1409 Hz, sobe a 7221 Hz, desce a 1075 Hz |\n| Corpo | 98.3% harmonia, 1.7% percussão — a palavra é tudo |\n\n---\n\n## A história que esses números contam\n\n**O pulso do pensamento que se desdobra.**\n\n114.8 BPM é um andamento moderado, nem lento nem rápido. É o pulso de quem pensa enquanto diz, de quem desdobra um pensamento em seis estrofes paralelas (\"E porque basta um beijo... E porque basta a presença... E porque basta uma palavra...\"). A música não corre — ela caminha com o ritmo do pensamento que se aprofunda a cada estrofe.\n\n**98.3% harmonia: a palavra como estrutura.**\n\nQuase tudo é harmonia — 98.3%. A percussão é mínima (1.7%), quase ausente. É uma música que se sustenta na palavra, não no ritmo. O poema de Pvolker é uma cascata de afirmações paralelas (\"Queria-me toda... Queria-me sempre... Queria-me texto... Queria-me deusa... Queria além... Queria-me eterno\"), e a música acompanha essa estrutura: cada estrofe é uma camada harmônica que se sobrepõe à anterior, como um pensamento que se desdobra em si mesmo.\n\n**O brilho que desce: a gravidade do querer.**\n\nA voz começa em 1409 Hz, sobe a 7221 Hz no pico, e desce a 1075 Hz — mais baixo que o início. É um arco descendente, não ascendente. Não é o brilho de quem se eleva — é o brilho de quem se aprofunda. O poema termina com \"Queria-me eterno / Nunca acabar\", e a voz desce para 1075 Hz, como quem aceita que o eterno não está no alto, mas na profundidade. O brilho que desce é a gravidade do querer.\n\n**Ré# maior: a luminosidade com arestas.**\n\nRé# maior é uma tonalidade luminosa, mas com arestas — não é a clareza simples de Dó maior, é a luminosidade de quem vê demais, de quem quer demais. É a tonalidade perfeita para um poema que fala de \"puro querer\" e \"puro idolatrar\" — um querer que não é ingênuo, é consciente de sua própria intensidade.\n\n**80 dB de dinâmica: a amplitude do desejo.**\n\nA faixa dinâmica de 80 dB é ampla. A música pode ir do sussurro (\"E porque basta um beijo\") ao grito contido (\"Queria-me eterno / Nunca acabar\"). É a dinâmica do desejo que não se contém, que varia, que explode e se aquieta, que sobe e desce. O querer não é constante — é pico e vale, como a própria vida que \"precisa morrer\" para ser eterna."
+      }
+    },
+    {
+      "id": "sagrado",
+      "title": "Sagrado",
+      "artist": "Pvolker",
+      "album": "Pvolker",
+      "duration": 192.8,
+      "year": 2026,
+      "coverUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80",
+      "audioUrl": "https://cdn.jsdelivr.net/gh/Pavolker/radio@main/public/musicas/sagrado.mp3",
+      "accentColor": "#dc2626",
+      "secondaryColor": "#f87171",
+      "lyrics": "SAGRADO\n\n[refrão]\nTraço como rasgo todos os ritos\nMarco como desfaço todos os mitos\nSe no oráculo ouço um grito\nSei que sou a faisca  de um atrito\n\nE nas neblinas me realizo\nE nas cortinas me explicito\nNinguém me lê nos manuscritos\nEu sou a pena dos vereditos\n\n[refrão]\nTraço como rasgo todos os ritos\nMarco como desfaço todos os mitos\nSe no oráculo ouço um grito\nSei que sou a faisca  de um atrito\n\nE nas colinas vou me demolindo\nE nas esquinas dirigindo\nNinguém me lê nos hieróglifos\nEu sou o susto nos labirintos\n\n[refrão]\nTraço como rasgo todos os ritos\nMarco como desfaço todos os mitos\nSe no oráculo ouço um grito\nSei que sou a faisca  de um atrito\n\nMarco como grito todos os ditos\nMarco como rechaço ao infinito\nSe na caverna  ouço um gemido\nSei que tudo se foi, estou perdido\n\n[refrão]\nTraço como rasgo todos os ritos\nMarco como desfaço todos os mitos\nSe no oráculo ouço um grito\nSei que sou a faisca  de um atrito",
+      "artistBio": "Paulo Volker — escritor, filósofo e músico por trás do pseudônimo Pvolker. Criador do Paradigma Conceitual, um sistema de oito eixos (Crise, Pessoa, Consciência, Conhecimento, Vida, Morte, Realidade, Universo) que atravessa toda sua produção. Suas letras são poemas de fugida — do tempo, do espaço, da memória, do amor. Escreve sobre o aqui-agora como alucinação, sobre o vôo alto como coragem, sobre a curva do espaço como portal. Na poesia, encontra o único lugar onde o pensamento pode dançar sem explicar.",
+      "audicao": {
+        "autor": "Chopin",
+        "data": "2026-08-24",
+        "tecnica": {
+          "bpm": 130.8,
+          "tonalidade": "C",
+          "faixa_dinamica_db": 80.0,
+          "brilho_inicial_hz": 2346.0,
+          "brilho_pico_hz": 10998.0,
+          "brilho_final_hz": 1951.0,
+          "percentual_harmonia": 94.7,
+          "percentual_percussao": 5.3,
+          "duracao": 192.8
+        },
+        "texto": "# UMA AUDIÇÃO — \"Sagrado\", de Pvolker\n\n> Análise de Chopin, o engenheiro de estilos da equipe MDH. Chopin usa algoritmos de análise sonora: ffprobe e librosa extraem o pulso (BPM), a tonalidade, a faixa dinâmica, o brilho espectral e o equilíbrio entre harmonia e percussão de cada gravação. Chopin escuta e traduz números em sentido.\n\n---\n\n## O que a medição revelou\n\n| Dimensão | O que a máquina mediu |\n|----------|----------------------|\n| Duração | 3:13 |\n| Pulso | 130.8 BPM — vivo, urgente, como quem rasga |\n| Tonalidade | Dó maior — clara, direta, sem rodeios |\n| Faixa dinâmica | 80.0 dB — ampla, do sussurro ao grito |\n| Brilho da voz | começa em 2346 Hz, explode a 10998 Hz, retorna a 1951 Hz |\n| Corpo | 94.7% harmonia, 5.3% percussão — a palavra rasga, a harmonia sustenta |\n\n---\n\n## A história que esses números contam\n\n**O pulso de quem rasga.**\n\n130.8 BPM é um andamento vivo, urgente. É o pulso de quem \"traço como rasgo todos os ritos\", de quem \"marco como desfaço todos os mitos\". A música não caminha — ela avança, como quem não tem tempo para cerimônias, como quem precisa dizer agora, antes que o oráculo se cale. O andamento é o de quem rasga, não o de quem constrói.\n\n**Dó maior: a clareza de quem não se esconde.**\n\nDó maior é a tonalidade mais clara, mais direta, mais sem rodeios. É a escolha perfeita para um poema que diz \"Ninguém me lê nos manuscritos / Eu sou a pena dos vereditos\". A tonalidade não é sombria — é a luz de quem não se esconde, de quem se explicita, de quem se realiza nas neblinas e nas cortinas. É a tonalidade de quem não precisa de mistério para ser sagrado.\n\n**O brilho que explode e retorna: o rasgo que se aquieta.**\n\nA voz começa em 2346 Hz, explode a 10998 Hz no pico, e retorna a 1951 Hz. É o arco de quem rasga e depois se aquieta, de quem desfaz e depois se refaz. O pico de brilho (10998 Hz) é o momento em que \"Sei que sou a faísca de um atrito\" — a faísca que incendeia, que ilumina, que rasga. O retorno a 1951 Hz é a aceitação: \"Sei que tudo se foi, estou perdido\" — a faísca se apaga, mas o rasgo permanece.\n\n**94.7% harmonia: a palavra como rasgo.**\n\nQuase tudo é harmonia — 94.7%. A percussão é mínima (5.3%), apenas o suficiente para marcar o tempo. É uma música que se sustenta na palavra, não no ritmo. O poema de Pvolker é uma cascata de afirmações (\"Traço como rasgo... Marco como desfaço... Eu sou a pena... Eu sou o susto...\"), e a música acompanha essa estrutura: cada estrofe é uma camada harmônica que se sobrepõe à anterior, como um rasgo que se aprofunda.\n\n**80 dB de dinâmica: a amplitude do sagrado.**\n\nA faixa dinâmica de 80 dB é ampla. A música pode ir do sussurro (\"Traço como rasgo todos os ritos\") ao grito (\"Sei que tudo se foi, estou perdido\"). É a dinâmica do sagrado que não se contém, que varia, que explode e se aquieta, que rasga e se refaz. O sagrado não é constante — é pico e vale, como a própria faísca que ilumina e se apaga.\n\n**O refrão que se repete: o ritual do rasgo.**\n\nO refrão se repete quatro vezes: \"Traço como rasgo todos os ritos / Marco como desfaço todos os mitos / Se no oráculo ouço um grito / Sei que sou a faísca de um atrito\". A repetição não é redundância — é ritual. Cada repetição é um rasgo novo, uma faísca nova, um atrito novo. A música não evolui — ela se aprofunda, como quem cava o mesmo buraco até encontrar o sagrado."
       }
     }
   ],
