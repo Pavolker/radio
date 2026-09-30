@@ -32,9 +32,20 @@ Cada análise combina dados objetivos extraídos via algoritmos (ffprobe + libro
 24. [O Rezo dos Oas — Angélica Sátiro](24-o-rezo-dos-oas.md)
 25. [Puro Querer — Pvolker](25-puro-querer.md)
 26. [Sagrado — Pvolker](26-sagrado.md)
+27. [A Ponta dos Dedos das Almas Penadas — Angélica Sátiro](27-a-ponta-dos-dedos-das-almas-penadas.md)
+28. [Blues de la Máquina Honesta — Angélica Sátiro](28-blues-de-la-maquina-honesta.md)
+29. [Desafiar — Pvolker](29-desafiar.md)
+30. [Facada — Pvolker](30-facada.md)
+31. [Fôlego — Angélica Sátiro](31-folego.md)
+32. [Frustração — Pvolker](32-frustracao.md)
+33. [Garça Branca — Pvolker](33-garca-branca.md)
+34. [Hino — Pvolker](34-hino.md)
+35. [Lo Que Solo Yo Sé Hacer — Angélica Sátiro](35-lo-que-solo-yo-se-hacer.md)
+36. [Lumi No Puede Jugar Con El Barro — Angélica Sátiro](36-lumi-no-puede-jugar-con-el-barro.md)
+37. [Pobre Seguir — Pvolker](37-pobre-seguir.md)
 
 ---
 
-**Total:** 26 análises
-**Data:** agosto de 2026
+**Total:** 37 análises
+**Data:** setembro de 2026
 **Método:** ffprobe + librosa → dados técnicos → interpretação poética
