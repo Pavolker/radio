@@ -35,6 +35,15 @@ interface RadioState {
   currentBitrate: number;
   isLiveMode: boolean;
 
+  // Shared Track Mode (música compartilhada exclusivamente via link)
+  sharedTrackId: string | null;
+  isSharedTrackMode: boolean;
+  hasSharedTrackEnded: boolean;
+  setSharedTrackMode: (trackId: string | null) => void;
+  exitSharedMode: () => void;
+  setHasSharedTrackEnded: (ended: boolean) => void;
+  replaySharedTrack: () => void;
+
   // Shuffle / Random Mode
   isShuffled: boolean;
   shuffleOrder: number[];
@@ -195,6 +204,11 @@ export const useRadioStore = create<RadioState>((set, get) => {
     currentBitrate: 320,
     isLiveMode: true,
 
+    // Shared Track Mode
+    sharedTrackId: null,
+    isSharedTrackMode: false,
+    hasSharedTrackEnded: false,
+
     // Shuffle / Random Mode — ligado por padrão
     isShuffled: true,
     shuffleOrder: initialShuffleOrder,
@@ -216,7 +230,11 @@ export const useRadioStore = create<RadioState>((set, get) => {
     githubError: null,
 
   togglePlay: () => {
-    const { isPlaying, streamStatus } = get();
+    const { isPlaying, streamStatus, hasSharedTrackEnded, replaySharedTrack } = get();
+    if (hasSharedTrackEnded) {
+      replaySharedTrack();
+      return;
+    }
     audioEngine.resumeContext();
     if (isPlaying) {
       set({ isPlaying: false, streamStatus: 'paused' });
@@ -226,7 +244,7 @@ export const useRadioStore = create<RadioState>((set, get) => {
   },
 
   playTrack: (index) => {
-    const { tracks, history, currentTrackIndex, shuffleOrder } = get();
+    const { tracks, history, currentTrackIndex, shuffleOrder, isSharedTrackMode, sharedTrackId } = get();
     if (index >= 0 && index < tracks.length) {
       const prevTrack = tracks[currentTrackIndex];
       const now = new Date();
@@ -238,20 +256,37 @@ export const useRadioStore = create<RadioState>((set, get) => {
       const shuffleIdx = shuffleOrder.indexOf(index);
       const newShuffleIndex = shuffleIdx >= 0 ? shuffleIdx : 0;
 
+      // Se o usuário selecionou deliberadamente outra faixa diferente da compartilhada, encerra o modo compartilhado
+      const isSwitchingAway = isSharedTrackMode && tracks[index]?.id !== sharedTrackId;
+      if (isSwitchingAway) {
+        try {
+          if (typeof window !== 'undefined' && window.location.search) {
+            window.history.replaceState({}, '', window.location.pathname);
+          }
+        } catch (e) {}
+      }
+
       audioEngine.resumeContext();
       set({
         currentTrackIndex: index,
         isPlaying: true,
         streamStatus: 'connecting',
         history: newHistory,
-        shuffleIndex: newShuffleIndex
+        shuffleIndex: newShuffleIndex,
+        hasSharedTrackEnded: false,
+        ...(isSwitchingAway ? { isSharedTrackMode: false, sharedTrackId: null } : {})
       });
     }
   },
 
   nextTrack: () => {
-    const { isShuffled, shuffleOrder, shuffleIndex, tracks, currentTrackIndex } = get();
+    const { isShuffled, shuffleOrder, shuffleIndex, tracks, currentTrackIndex, isSharedTrackMode } = get();
     
+    // Se estava em modo faixa compartilhada e o usuário clicou para avançar, desativa o modo compartilhado
+    if (isSharedTrackMode) {
+      get().exitSharedMode();
+    }
+
     if (isShuffled) {
       const nextShuffleIdx = (shuffleIndex + 1) % shuffleOrder.length;
       const nextIdx = shuffleOrder[nextShuffleIdx];
@@ -268,7 +303,10 @@ export const useRadioStore = create<RadioState>((set, get) => {
         shuffleIndex: nextShuffleIdx,
         isPlaying: true,
         streamStatus: 'connecting',
-        history: newHistory
+        history: newHistory,
+        isSharedTrackMode: false,
+        sharedTrackId: null,
+        hasSharedTrackEnded: false
       });
     } else {
       const nextIdx = (currentTrackIndex + 1) % tracks.length;
@@ -277,8 +315,13 @@ export const useRadioStore = create<RadioState>((set, get) => {
   },
 
   previousTrack: () => {
-    const { isShuffled, shuffleOrder, shuffleIndex, tracks, currentTrackIndex } = get();
+    const { isShuffled, shuffleOrder, shuffleIndex, tracks, currentTrackIndex, isSharedTrackMode } = get();
     
+    // Se estava em modo faixa compartilhada e o usuário clicou para voltar, desativa o modo compartilhado
+    if (isSharedTrackMode) {
+      get().exitSharedMode();
+    }
+
     if (isShuffled) {
       const prevShuffleIdx = (shuffleIndex - 1 + shuffleOrder.length) % shuffleOrder.length;
       const prevIdx = shuffleOrder[prevShuffleIdx];
@@ -295,7 +338,10 @@ export const useRadioStore = create<RadioState>((set, get) => {
         shuffleIndex: prevShuffleIdx,
         isPlaying: true,
         streamStatus: 'connecting',
-        history: newHistory
+        history: newHistory,
+        isSharedTrackMode: false,
+        sharedTrackId: null,
+        hasSharedTrackEnded: false
       });
     } else {
       const prevIdx = (currentTrackIndex - 1 + tracks.length) % tracks.length;
@@ -410,6 +456,51 @@ export const useRadioStore = create<RadioState>((set, get) => {
       newOrder.unshift(currentTrackIndex);
     }
     set({ shuffleOrder: newOrder, shuffleIndex: 0 });
+  },
+
+  // Shared Track Mode Actions
+  setSharedTrackMode: (trackId) => {
+    if (!trackId) {
+      set({ isSharedTrackMode: false, sharedTrackId: null, hasSharedTrackEnded: false });
+      return;
+    }
+    const { tracks } = get();
+    const matchIndex = tracks.findIndex((t) => t.id === trackId);
+    if (matchIndex !== -1) {
+      set({
+        isSharedTrackMode: true,
+        sharedTrackId: trackId,
+        hasSharedTrackEnded: false,
+        currentTrackIndex: matchIndex
+      });
+    }
+  },
+
+  exitSharedMode: () => {
+    try {
+      if (typeof window !== 'undefined' && window.location.search) {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    } catch (e) {
+      // ignore
+    }
+    set({
+      isSharedTrackMode: false,
+      sharedTrackId: null,
+      hasSharedTrackEnded: false
+    });
+  },
+
+  setHasSharedTrackEnded: (ended) => set({ hasSharedTrackEnded: ended }),
+
+  replaySharedTrack: () => {
+    audioEngine.resumeContext();
+    set({
+      isPlaying: true,
+      streamStatus: 'connecting',
+      hasSharedTrackEnded: false,
+      currentTime: 0
+    });
   },
 
   setGithubModalOpen: (open) => set({ isGithubModalOpen: open }),

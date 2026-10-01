@@ -11,7 +11,10 @@ import {
   Clock,
   Shuffle,
   Share2,
-  Check
+  Check,
+  RotateCcw,
+  Sparkles,
+  Radio
 } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 import { audioEngine } from '../lib/audioEngine';
@@ -44,7 +47,11 @@ export const MainPlayerCard: React.FC = () => {
     toggleShuffle,
     stationInfo,
     setCurrentTime: setStoreCurrentTime,
-    setDuration: setStoreDuration
+    setDuration: setStoreDuration,
+    isSharedTrackMode,
+    hasSharedTrackEnded,
+    replaySharedTrack,
+    exitSharedMode
   } = useRadioStore();
 
   // Dual audio elements: current (playing) + next (preloading)
@@ -71,6 +78,10 @@ export const MainPlayerCard: React.FC = () => {
 
   // --- Preload next track when current is 80% done ---
   useEffect(() => {
+    // Não pré-carrega próxima música se estiver ouvindo faixa compartilhada exclusiva
+    const state = useRadioStore.getState();
+    if (state.isSharedTrackMode) return;
+
     const audio = currentAudioRef.current;
     if (!audio || !isPlaying || duration <= 0) return;
 
@@ -94,7 +105,7 @@ export const MainPlayerCard: React.FC = () => {
 
     // eslint-disable-next-line no-console
     console.log('[Gapless] Preloaded:', nextTrack.title);
-  }, [currentTime, duration, isPlaying, tracks, getNextIndex]);
+  }, [currentTime, duration, isPlaying, tracks, getNextIndex, isSharedTrackMode]);
 
   // --- Sync Current Audio Element with Zustand Store ---
   useEffect(() => {
@@ -142,6 +153,21 @@ export const MainPlayerCard: React.FC = () => {
     };
 
     const handleEnded = () => {
+      const state = useRadioStore.getState();
+
+      // Modo Faixa Compartilhada / Exclusiva: NÃO avança para a próxima faixa automaticamente!
+      if (state.isSharedTrackMode) {
+        const current = currentAudioRef.current;
+        if (current) {
+          current.pause();
+          current.currentTime = 0;
+        }
+        setCurrentTime(0);
+        setStoreCurrentTime(0);
+        useRadioStore.setState({ isPlaying: false, streamStatus: 'paused', hasSharedTrackEnded: true });
+        return;
+      }
+
       // GAPLESS TRANSITION: if nextAudio is preloaded and ready, swap immediately
       const nextAudio = nextAudioRef.current;
       const nextIdx = preloadedIndexRef.current;
@@ -221,7 +247,24 @@ export const MainPlayerCard: React.FC = () => {
   };
 
   const handleShare = async () => {
-    const shareUrl = `${window.location.origin}${window.location.pathname}?track=${currentTrack?.id}`;
+    const shareUrl = `${window.location.origin}/?track=${currentTrack?.id}`;
+    const shareData = {
+      title: `${currentTrack?.title} - ${currentTrack?.artist}`,
+      text: `Ouça "${currentTrack?.title}" de ${currentTrack?.artist} na Rádio Digital SINAPSES DOS VENTOS:`,
+      url: shareUrl
+    };
+
+    if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share(shareData);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        return;
+      } catch (err) {
+        // Fallback para área de transferência se o usuário cancelou o diálogo de compartilhamento
+      }
+    }
+
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
@@ -391,6 +434,22 @@ export const MainPlayerCard: React.FC = () => {
             </span>
           </div>
 
+          {/* Modo Faixa Compartilhada / Exclusiva Badge */}
+          {isSharedTrackMode && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-semibold tracking-wide w-fit">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+              <span>Modo Faixa Dedicada</span>
+              <span className="text-cyan-500/60">•</span>
+              <button
+                onClick={exitSharedMode}
+                className="text-white hover:text-cyan-200 underline font-normal transition-colors"
+                title="Sintonizar a programação contínua 24/7 da rádio"
+              >
+                Sintonizar Rádio 24/7
+              </button>
+            </div>
+          )}
+
           {/* Song Title & Artist */}
           <div>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white line-clamp-1 bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text">
@@ -527,6 +586,40 @@ export const MainPlayerCard: React.FC = () => {
             </div>
 
           </div>
+
+          {/* Card de Fim de Música Compartilhada */}
+          {isSharedTrackMode && hasSharedTrackEnded && (
+            <div className="mt-4 p-5 rounded-2xl bg-gradient-to-r from-cyan-950/95 via-slate-900/95 to-indigo-950/95 border border-cyan-400/50 text-center shadow-2xl animate-in fade-in zoom-in-95 duration-300">
+              <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400">
+                <Check className="w-5 h-5" />
+              </div>
+              <h4 className="text-base font-bold text-white mb-1">
+                Fim da faixa: {currentTrack?.title}
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto mb-4">
+                Você ouviu a música compartilhada de <strong>{currentTrack?.artist}</strong>. Deseja ouvir novamente ou sintonizar a programação contínua 24/7 da Rádio SINAPSES DOS VENTOS?
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={replaySharedTrack}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/20 text-white font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-lg"
+                >
+                  <RotateCcw className="w-4 h-4 text-cyan-400" />
+                  <span>Ouvir Novamente</span>
+                </button>
+                <button
+                  onClick={() => {
+                    exitSharedMode();
+                    nextTrack();
+                  }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-cyan-500/30 transition-all active:scale-95"
+                >
+                  <Radio className="w-4 h-4" />
+                  <span>Sintonizar Rádio 24/7</span>
+                </button>
+              </div>
+            </div>
+          )}
 
         </div>
 

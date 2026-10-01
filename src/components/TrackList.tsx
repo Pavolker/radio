@@ -9,7 +9,9 @@ export const TrackList: React.FC = () => {
     isPlaying,
     playTrack,
     favorites,
-    toggleFavorite
+    toggleFavorite,
+    isSharedTrackMode,
+    exitSharedMode
   } = useRadioStore();
 
   const [copiedTrackId, setCopiedTrackId] = useState<string | null>(null);
@@ -20,9 +22,26 @@ export const TrackList: React.FC = () => {
     return `${m}:${s.toString().padStart(2, '0')}`;
   };
 
-  const handleShare = async (e: React.MouseEvent, trackId: string) => {
+  const handleShare = async (e: React.MouseEvent, trackId: string, trackTitle?: string, trackArtist?: string) => {
     e.stopPropagation();
-    const shareUrl = `${window.location.origin}${window.location.pathname}?track=${trackId}`;
+    const shareUrl = `${window.location.origin}/?track=${trackId}`;
+    const shareData = {
+      title: `${trackTitle || 'Música'} - ${trackArtist || 'SINAPSES DOS VENTOS'}`,
+      text: `Ouça "${trackTitle || 'esta música'}" na Rádio Digital SINAPSES DOS VENTOS:`,
+      url: shareUrl
+    };
+
+    if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share(shareData);
+        setCopiedTrackId(trackId);
+        setTimeout(() => setCopiedTrackId(null), 2000);
+        return;
+      } catch (err) {
+        // fallback to clipboard
+      }
+    }
+
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopiedTrackId(trackId);
@@ -72,7 +91,12 @@ export const TrackList: React.FC = () => {
           return (
             <div
               key={track.id}
-              onClick={() => playTrack(index)}
+              onClick={() => {
+                if (isSharedTrackMode) {
+                  exitSharedMode();
+                }
+                playTrack(index);
+              }}
               className={`grid grid-cols-12 gap-4 items-center px-6 py-3 cursor-pointer transition-all duration-200 group ${
                 isCurrent
                   ? 'bg-cyan-950/40 border-l-2 border-cyan-400'
@@ -130,7 +154,7 @@ export const TrackList: React.FC = () => {
               {/* Duration + Favorite + Share */}
               <div className="col-span-1 flex items-center justify-end gap-2">
                 <button
-                  onClick={(e) => handleShare(e, track.id)}
+                  onClick={(e) => handleShare(e, track.id, track.title, track.artist)}
                   title="Copiar link desta música"
                   className={`p-1.5 rounded-lg transition-all ${
                     copiedTrackId === track.id

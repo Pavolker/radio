@@ -14,51 +14,123 @@ import { TrackList } from './components/TrackList';
 import { PlayerBar } from './components/PlayerBar';
 import { AudicaoPage } from './components/AudicaoPage';
 import { useRadioStore } from './lib/store';
-import { Radio, Heart, Globe, ShieldCheck, Sparkles, Play, X, Headphones } from 'lucide-react';
+import { Radio, Heart, Globe, ShieldCheck, Sparkles, Play, Pause, X, Headphones } from 'lucide-react';
+import type { Track } from './types';
+
+/**
+ * Localiza uma faixa no catálogo a partir de qualquer identificador de busca da URL:
+ * - ID canônico ("track-031")
+ * - Número ("31" ou "031")
+ * - Slug do áudio ("folego" ou "blues-de-la-maquina-honesta")
+ * - Título normalizado ("folego" ou "garca-branca")
+ */
+function findTrackByQuery(query: string, tracks: Track[]): { track: Track; index: number } | null {
+  if (!query || !tracks || tracks.length === 0) return null;
+  const clean = query.trim().toLowerCase();
+
+  // 1. Match direto pelo ID (ex: "track-031")
+  let idx = tracks.findIndex(t => t.id.toLowerCase() === clean);
+  if (idx !== -1) return { track: tracks[idx], index: idx };
+
+  // 2. Match por número (ex: "31", "031")
+  const numMatch = clean.match(/\d+/);
+  if (numMatch) {
+    const num = parseInt(numMatch[0], 10);
+    const candidateId = `track-${String(num).padStart(3, '0')}`;
+    idx = tracks.findIndex(t => t.id.toLowerCase() === candidateId);
+    if (idx !== -1) return { track: tracks[idx], index: idx };
+  }
+
+  // 3. Match por slug na URL do áudio (ex: "folego")
+  idx = tracks.findIndex(t => t.audioUrl.toLowerCase().includes(clean));
+  if (idx !== -1) return { track: tracks[idx], index: idx };
+
+  // 4. Match por slug de título
+  const slugify = (text: string) =>
+    text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+
+  const qSlug = slugify(clean);
+  idx = tracks.findIndex(t => {
+    const tSlug = slugify(t.title);
+    return tSlug === qSlug || tSlug.includes(qSlug) || qSlug.includes(tSlug);
+  });
+  if (idx !== -1) return { track: tracks[idx], index: idx };
+
+  return null;
+}
 
 function HomePage() {
-  const { tracks, currentTrackIndex, togglePlay, theme } = useRadioStore();
+  const {
+    tracks,
+    currentTrackIndex,
+    isPlaying,
+    togglePlay,
+    theme,
+    isSharedTrackMode,
+    exitSharedMode,
+    nextTrack
+  } = useRadioStore();
   const currentTrack = tracks[currentTrackIndex] || tracks[0];
-  const [sharedTrackId, setSharedTrackId] = useState<string | null>(null);
   const [dismissedBanner, setDismissedBanner] = useState(false);
 
   return (
     <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Banner de música compartilhada */}
-      {sharedTrackId && !dismissedBanner && currentTrack && (
+      {isSharedTrackMode && !dismissedBanner && currentTrack && (
         <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-          <div className="w-full rounded-2xl p-4 bg-gradient-to-r from-cyan-600/20 via-indigo-600/20 to-pink-600/20 border border-cyan-500/30 text-white backdrop-blur-2xl shadow-2xl shadow-cyan-500/10 flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+          <div className="w-full rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-cyan-600/25 via-indigo-600/25 to-pink-600/25 border border-cyan-400/40 text-white backdrop-blur-2xl shadow-2xl shadow-cyan-500/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
             <div className="flex items-center gap-4">
               <img
                 src={currentTrack.coverUrl}
                 alt={currentTrack.title}
                 referrerPolicy="no-referrer"
-                className="w-14 h-14 rounded-xl object-cover border-2 border-cyan-400/50 shadow-lg shrink-0"
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover border-2 border-cyan-400/60 shadow-lg shadow-cyan-500/20 shrink-0"
               />
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center gap-2 text-xs text-cyan-300 font-mono font-bold uppercase tracking-wider mb-0.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Música compartilhada com você
+                  <Sparkles className="w-4 h-4 animate-pulse text-cyan-400" />
+                  Música compartilhada exclusivamente com você
                 </div>
-                <h3 className="text-lg font-bold text-white leading-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-white leading-tight truncate">
                   {currentTrack.title}
                 </h3>
-                <p className="text-sm text-slate-300">
+                <p className="text-sm text-slate-300 truncate">
                   {currentTrack.artist}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+
+            <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto justify-end">
               <button
                 onClick={togglePlay}
                 className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400 text-white font-bold text-sm shadow-lg shadow-cyan-500/30 transition-all active:scale-95"
               >
-                <Play className="w-5 h-5 fill-current" />
-                <span>Ouvir Agora</span>
+                {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
+                <span>{isPlaying ? 'Pausar' : 'Ouvir Agora'}</span>
               </button>
+
+              <button
+                onClick={() => {
+                  exitSharedMode();
+                  nextTrack();
+                }}
+                title="Sair da faixa individual e ouvir a programação contínua da rádio 24/7"
+                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-white/10 text-xs font-semibold text-slate-200 hover:text-white transition-all active:scale-95"
+              >
+                <Radio className="w-4 h-4 text-cyan-400" />
+                <span className="hidden sm:inline">Ouvir Rádio 24/7</span>
+              </button>
+
               <button
                 onClick={() => setDismissedBanner(true)}
-                className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-white/10 text-slate-400 hover:text-white transition-all"
+                className="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-white/10 text-slate-400 hover:text-white transition-all"
+                title="Ocultar aviso"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -135,27 +207,24 @@ export default function App() {
     setShortcutsModalOpen,
     isEqualizerModalOpen,
     isShortcutsModalOpen,
-    isCinemaMode
+    isCinemaMode,
+    setSharedTrackMode
   } = useRadioStore();
 
   const currentTrack = tracks[currentTrackIndex];
 
-  // Auto-play da música compartilhada via link (?track=track-XXX)
+  // Ativação da faixa compartilhada exclusivamente via link (?track=...)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const trackId = params.get('track');
-    if (trackId) {
-      const timeout = setTimeout(() => {
-        const { tracks: storeTracks } = useRadioStore.getState();
-        const index = storeTracks.findIndex((t: { id: string }) => t.id === trackId);
-        if (index !== -1) {
-          playTrack(index);
-          window.history.replaceState({}, '', window.location.pathname);
-        }
-      }, 100);
-      return () => clearTimeout(timeout);
+    const trackQuery = params.get('track');
+    if (trackQuery && tracks.length > 0) {
+      const match = findTrackByQuery(trackQuery, tracks);
+      if (match) {
+        setSharedTrackMode(match.track.id);
+        playTrack(match.index);
+      }
     }
-  }, [tracks, playTrack]);
+  }, [tracks, setSharedTrackMode, playTrack]);
 
   // Global Keyboard Shortcuts
   useEffect(() => {
