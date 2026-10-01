@@ -43,7 +43,7 @@ export const AudicaoPage: React.FC = () => {
             <Headphones className="w-5 h-5 text-cyan-400" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white">Audição</h2>
+            <h2 className="text-lg font-bold text-white">Análise Sonora</h2>
             <p className="text-xs text-slate-400">
               {tracksWithAudicao.length} de {tracks.length} músicas analisadas por Chopin
             </p>
