@@ -44,8 +44,61 @@ A mesma assinatura rítmica do "Blues do Cansaço", mas aqui o descompasso não 
 
 **A voz que nasce do chão da floresta.**
 
-O brilho inicial a 987 Hz é o mais baixo de todas as músicas medidas nesta sessão. A voz começa *no chão da mata*, entre as formigas e as largadas. Dali, ela sobe até 2603 Hz — o ponto do sol nascendo "*a esquerda do pequeno rio*" — e termina a 2067 Hz, como alguém que, depois de atravessar o espetáculo inteiro, ainda está de pé, contemplando "*esse tempo que nunca passa*". O arco não é de ascensão e queda dramática: é o de quem acorda, se espreguiça e permanece.
+O brilho inicial a 987 Hz é o mais baixo de todas as músicas medidas nesta sessão. A voz começa *no chão da mata*, entre as formigas e as lagartas. Dali, ela sobe até 2603 Hz — o ponto do sol nascendo "*a esquerda do pequeno rio*" — e termina a 2067 Hz, como alguém que, depois de atravessar o espetáculo inteiro, ainda está de pé, contemplando "*esse tempo que nunca passa*". O arco não é de ascensão e queda dramática: é o de quem acorda, se espreguiça e permanece.
 
 **Quando a harmonia cede lugar à palavra.**
 
 Apenas 50% de harmonia — o menor percentual harmônico entre todas as faixas analisadas. A música não se sustenta em acordes; sustenta-se na *voz que nomeia*. A percussão ocupa 28%, e o restante é o silêncio entre as palavras, os intervalos em que o vento sopra e o corpo escuta. É uma canção que não precisa de orquestra porque a mata já é a orquestra. O compositor apenas abriu a porta.
+
+---
+
+## Letra
+
+Olho aqui pela porta
+Essa porta que abre em duas folhas
+Da madeira mais velha
+Das arvores que já não existem
+E ela me mostra a mata
+Onde as bromélias ficam vermelhas
+E as sombras voam
+Entre os galhos entrelaçados
+E os pássaros cantam
+O bem-te-vi me vigia
+E conta que acordo cedo
+E conta que olho o sol
+O sol nascendo
+a esquerda do pequeno rio
+Nascendo para o mundo
+Dizendo se o um e o todos
+O ser que era e o que é
+Sendo o que será
+E as borboletas já revoam
+E as abelhas já zunem
+As princesas Jatais
+De  manto azulados
+E o porte nobre nas flores
+Todas as flores brancas
+Todas as flores reluzentes
+Por onde as fadas passam
+Sombreando as formigas
+As lagartas e salamandras
+Todos os seres  me observam
+Amanhecer reluzente
+Repetido eternamente
+Como um retorno  filosofia
+Um entorno desafia
+Abaixo o azul das abóbodas
+Sopram as nuvens
+Velas brancas dos céus
+Misturando com o verde
+As copas das árvores
+Rompidas de sons  insetos
+Todos em despertar
+Afinal   mais uma manhã
+Me arrebata  eternidade
+Desse tempo que nunca passa
+Desse tempo que se disfarça
+Desse tempo  ultrapassa
+Ah  manhã de frio vento
+Ah  raios sonolentos
+Por onde eu vou.
