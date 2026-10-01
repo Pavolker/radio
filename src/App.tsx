@@ -14,7 +14,7 @@ import { TrackList } from './components/TrackList';
 import { PlayerBar } from './components/PlayerBar';
 import { AudicaoPage } from './components/AudicaoPage';
 import { useRadioStore } from './lib/store';
-import { Radio, Heart, Globe, ShieldCheck, Sparkles, Play, Pause, X, Headphones } from 'lucide-react';
+import { Radio, Heart, Globe, ShieldCheck, Sparkles, Play, Pause, X } from 'lucide-react';
 import type { Track } from './types';
 
 /**
@@ -169,27 +169,6 @@ function HomePage() {
   );
 }
 
-function BlogPage() {
-  return (
-    <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="w-full max-w-4xl mx-auto py-16 px-6 text-center">
-        <div className="p-6 rounded-3xl backdrop-blur-2xl bg-slate-900/80 border border-white/10">
-          <div className="flex flex-col items-center gap-6 py-20">
-            <div className="p-4 rounded-2xl bg-amber-950/50 border border-amber-500/20">
-              <Headphones className="w-12 h-12 text-amber-400" />
-            </div>
-            <h2 className="text-2xl font-bold text-white">Em Breve</h2>
-            <p className="text-slate-400 max-w-md leading-relaxed">
-              O acervo de 200 análises musicais, 19 capítulos do livro "Filosofia da Música"
-              e textos autorais de Paulo Volker serão publicados aqui em breve.
-            </p>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-}
-
 export default function App() {
   const {
     togglePlay,
@@ -261,7 +240,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/audicao" element={<AudicaoPage />} />
-          <Route path="/blog" element={<BlogPage />} />
+          <Route path="*" element={<HomePage />} />
         </Routes>
 
         {/* Footer */}

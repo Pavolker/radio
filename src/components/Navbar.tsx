@@ -13,8 +13,7 @@ import {
   Waves,
   Disc,
   Volume2,
-  Headphones,
-  BookOpen
+  Headphones
 } from 'lucide-react';
 import { useRadioStore } from '../lib/store';
 import { AudioVisualizerMode } from '../types';
@@ -85,17 +84,6 @@ export const Navbar: React.FC = () => {
             >
               <Headphones className="w-4 h-4 inline-block mr-2 text-cyan-400" />
               Análise Sonora
-            </Link>
-            <Link
-              to="/blog"
-              className={`px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all ${
-                currentPath === '/blog'
-                  ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-500/10'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80 border border-transparent'
-              }`}
-            >
-              <BookOpen className="w-4 h-4 inline-block mr-2" />
-              Textos
             </Link>
           </div>
         </div>
@@ -208,17 +196,6 @@ export const Navbar: React.FC = () => {
         >
           <Headphones className="w-4 h-4 inline-block mr-1 text-cyan-400" />
           Análise Sonora
-        </Link>
-        <Link
-          to="/blog"
-          className={`flex-1 text-center px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
-            currentPath === '/blog'
-              ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-500/40'
-              : 'text-slate-400 hover:bg-slate-800/60'
-          }`}
-        >
-          <BookOpen className="w-4 h-4 inline-block mr-1" />
-          Textos
         </Link>
       </div>
     </header>
